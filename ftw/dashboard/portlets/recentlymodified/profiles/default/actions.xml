@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <object name="document_actions" meta_type="CMF Action Category">
+  <object name="watch" meta_type="CMF Action" i18n:domain="ftw.dashboard.portlets.recentlymodified">
+   <property name="title" i18n:translate="">Watch changes</property>
+   <property
+      name="description" i18n:translate="">Follow changes in this context in your personal dashboard.</property>
+   <property
+      name="url_expr">string:$folder_url/ftw.dashboard.addRecentlyModified</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+   <property name="available_expr">python:(member is not None) and ( context.portal_url() != folder_url)</property>
+  </object>
+ </object>
+</object>

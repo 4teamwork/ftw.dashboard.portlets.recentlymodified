@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-10-06 14:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:173
+msgid "${title} added to dashboard."
+msgstr "Portlet zum Beobachten der Änderungen in '${title}' wurde zum Dashboard hinzugefügt."
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:134
+msgid "Add recently modified Portlet"
+msgstr "Lezte Änderungen Portlet hinzugefügt"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:143
+msgid "Edit recently modified Portlet"
+msgstr "Letzte Änderungen Portlet bearbeiten"
+
+#. Default: "Follow changes in this context in your personal dashboard."
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
+msgid "Follow changes in this context in your personal dashboard."
+msgstr "In ihrem persönlichen Dashboard Änderungen dieses Abschnittes verfolgen"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:29
+msgid "How many items to list."
+msgstr "Wie viele Felder sollen aufgelistet werden"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
+msgid "Number of items to display"
+msgstr "Anzahl angezeigte Felder"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
+msgid "Only changes in the selected section will be displayed."
+msgstr "Nur Änderung im Selektierten Abschnitt werden angezeigt"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
+msgid "Section"
+msgstr "Abschnitt"
+
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:135
+msgid "This portlet displays recently modified content in a selected section."
+msgstr "Dieses Portlet zeigt die zuletzt veränderten Inahlte eines selektieren Abschnittes an"
+
+#. Default: "Watch changes"
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
+msgid "Watch changes"
+msgstr "Änderungen verfolgen"
+
+#. Default: "Recent Changes in ${section}"
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:96
+msgid "recent_changes_in"
+msgstr "Letzte Änderungen in ${section}"
+
+#. Default: "recently modified Changes Portlet"
+#: ftw.dashboard.portlets.recentlymodified/ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:53
+msgid "title_recentlyModifed_portlet"
+msgstr "Letzte Änderungen Portlet"
+
+

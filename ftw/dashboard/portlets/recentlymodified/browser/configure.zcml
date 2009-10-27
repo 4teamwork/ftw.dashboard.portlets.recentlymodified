@@ -1,0 +1,24 @@
+<configure
+	xmlns="http://namespaces.zope.org/zope"
+	xmlns:browser="http://namespaces.zope.org/browser"
+	xmlns:five="http://namespaces.zope.org/five"
+    xmlns:plone="http://namespaces.plone.org/plone"
+	i18n_domain="ftw.dashboard.portlets.recentlymodified">
+
+    <plone:portlet
+        name="ftw.dashboard.portlets.recentlymodified"
+        interface=".recentlymodified.IRecentlyModifiedPortlet"
+        assignment=".recentlymodified.Assignment"
+        renderer=".recentlymodified.Renderer"
+        addview=".recentlymodified.AddForm"
+        editview=".recentlymodified.EditForm"
+        />
+        
+    <browser:page
+        for="*"
+        name="ftw.dashboard.addRecentlyModified"
+        permission="zope.Public"
+        class=".recentlymodified.AddPortlet"
+        />
+        
+</configure>
