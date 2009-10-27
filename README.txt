@@ -4,7 +4,7 @@ the ftw.dashboard.portlets.recentlyModified paket, implements the recentlyModifi
 
 
 How to use ftw.dashboard.recentlyModified
-==================================
+=========================================
 
 1.) Install the ftw.dashboard.portlets.recentlyModified product with the portal_setup tool.
 
