@@ -24,6 +24,7 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.pipbox',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

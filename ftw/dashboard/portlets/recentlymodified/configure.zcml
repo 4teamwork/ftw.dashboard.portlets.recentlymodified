@@ -6,11 +6,13 @@
 	xmlns:plone="http://namespaces.plone.org/plone"
 	i18n_domain="ftw.dashboard.portlets.recentlymodified">
 
+    <include package="Products.pipbox" />
     <include package="plone.app.portlets" />
     <include package=".browser" />
 
-	<!-- Register the installation GenericSetup extension profile -->
-	<genericsetup:registerProfile
+
+    <!-- Register the installation GenericSetup extension profile -->
+    <genericsetup:registerProfile
       name="default"
       title="ftw.dashboard.portlets.recentlymodified"
       directory="profiles/default"
