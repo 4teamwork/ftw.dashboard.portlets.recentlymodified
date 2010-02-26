@@ -21,4 +21,12 @@
         class=".recentlymodified.AddPortlet"
         />
         
+    <browser:page
+        for="*"
+        name="quick_preview"
+        permission="zope.Public"
+        class=".recentlymodified.QuickPreview"
+        template="templates/quick_preview.pt"
+        />
+
 </configure>

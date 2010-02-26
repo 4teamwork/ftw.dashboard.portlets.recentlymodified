@@ -13,6 +13,7 @@ from plone.app.portlets.cache import render_cachekey
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from Products.CMFCore.interfaces._content import IFolderish
 from Products.statusmessages.interfaces import IStatusMessage
 
@@ -167,3 +168,7 @@ class AddPortlet(object):
             message = _(u"${title} added to dashboard.", mapping={'title' : title})
             IStatusMessage(request).addStatusMessage(message, type="info")
         return self.context.REQUEST.RESPONSE.redirect(self.context.absolute_url())
+
+class QuickPreview(BrowserView):
+    """
+    """

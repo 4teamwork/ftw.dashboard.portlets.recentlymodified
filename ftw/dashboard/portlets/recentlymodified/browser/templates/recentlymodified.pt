@@ -22,6 +22,11 @@
             
             <span class="title">
                 <img tal:replace="structure item_icon/html_tag" />
+                
+                <a tal:attributes="href string:${obj/getURL}/quick_preview"
+                   class="recentlymodified_item" title="Vorschau zeigen">
+                    <img tal:attributes="src string:${context/absolute_url}/info_icon.gif" alt=""/>
+                </a>
                 <a href=""
                    tal:attributes="href string:${obj/getURL}/view;
                                    title obj/Description;
