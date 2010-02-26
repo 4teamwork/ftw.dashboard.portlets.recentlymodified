@@ -1,5 +1,5 @@
 <center>
     <h1 tal:content="view/context/title_or_id"/>
-    <a tal:attributes="href view/context/absolute_url" tal:content="string:${view/context/title_or_id} öffnen" />
+    <a tal:attributes="href view/context/absolute_url" tal:content="string:${view/context/title_or_id} open" />
     <p tal:content="view/context/Description|nothing"/>
 </center>
