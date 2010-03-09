@@ -2,6 +2,10 @@ Changelog
 =========
 
 
+1.2
+---
+
+
 1.1
 ---
 * added Lightbox preview functionality, with the Product pipox.
