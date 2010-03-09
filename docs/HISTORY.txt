@@ -4,7 +4,9 @@ Changelog
 
 1.1
 ---
+* added Lightbox preview functionality, with the Product pipox.
 
+* changed the link to the standard view of the respectively type
 
 1.0
 ---
