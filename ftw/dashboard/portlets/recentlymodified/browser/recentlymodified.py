@@ -85,7 +85,7 @@ class Renderer(base.Renderer):
 
     @property
     def title(self):
-        brains = self.catalog(path={'query' : self.portal_path + self.data.section, 'depth' : 0})
+        brains = self.catalog(path={'query' : self.portal_path + str(self.data.section), 'depth' : 0})
         if len(brains) == 1:
             section_title = brains[0].Title.decode('utf-8')
         else:
@@ -95,14 +95,15 @@ class Renderer(base.Renderer):
     @memoize
     def _data(self):
         limit = self.data.count
-        reference = self.context.portal_catalog({
-                'path' : {
-                        'query' : self.portal_path + str(self.data.section),
-                        'depth' : 0,
-                         }
-                })[0]
 
-        if reference.portal_type == "Topic":
+        references = self.context.portal_catalog({
+            'path' : {
+                    'query' : self.portal_path + str(self.data.section),
+                    'depth' : 0,
+                     }
+            })
+
+        if references and len(references)>0 and references[0].portal_type == "Topic":
             query = reference.getObject().buildQuery()
         else:
             query = {
