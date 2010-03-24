@@ -104,7 +104,7 @@ class Renderer(base.Renderer):
             })
 
         if references and len(references)>0 and references[0].portal_type == "Topic":
-            query = reference.getObject().buildQuery()
+            query = references.getObject().buildQuery()
         else:
             query = {
                 'path' : self.portal_path + str(self.data.section),
