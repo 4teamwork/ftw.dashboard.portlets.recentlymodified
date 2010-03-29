@@ -2,6 +2,10 @@ Changelog
 =========
 
 
+1.1.2
+-----
+
+
 1.2
 ---
 * fixed bug: working now also with none section, then it search over the whole portal (section = portal)
