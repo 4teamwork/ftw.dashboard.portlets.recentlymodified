@@ -29,4 +29,12 @@
         template="templates/quick_preview.pt"
         />
 
+    <browser:page
+        for="*"
+        name="recently_modified_view"
+        permission="zope.Public"
+        class=".recentlymodified.View"
+        template="templates/recently_modified_view.pt"
+        />
+
 </configure>

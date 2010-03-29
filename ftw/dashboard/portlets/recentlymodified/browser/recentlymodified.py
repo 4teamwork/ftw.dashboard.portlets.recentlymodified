@@ -92,6 +92,18 @@ class Renderer(base.Renderer):
             section_title = self.portal.Title().decode('utf-8')
         return _(u"recent_changes_in", default=u"Recent Changes in ${section}", mapping={u"section" : section_title})
 
+    def recently_modified_url(self):
+        brains = self.catalog(path={'query' : self.portal_path + str(self.data.section), 'depth' : 0})
+        if len(brains) == 1:
+            section = brains[0].getObject()
+        else:
+            section = self.context.portal
+        
+        if section.portal_type == "Topic":
+            return section.absolute_url()
+        else:
+            return '%s/recently_modified_view' % section.absolute_url()
+
     @memoize
     def _data(self):
         limit = self.data.count
@@ -171,5 +183,9 @@ class AddPortlet(object):
         return self.context.REQUEST.RESPONSE.redirect(self.context.absolute_url())
 
 class QuickPreview(BrowserView):
+    """
+    """
+    
+class View(BrowserView):
     """
     """

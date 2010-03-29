@@ -40,11 +40,15 @@
             </span>
         </dd>
     </tal:items>
-
+    <dd class="portletFooter">
+        <a href="" tal:attributes="href string: ${view/recently_modified_url}" >Weitere ...</a>
+    </dd>
     <dd class="portletItem"
         tal:condition="not: view/recent_items"
         i18n:translate="box_recent_no_items">
         No items changed yet.
     </dd>
+
+
 
 </dl>
