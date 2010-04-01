@@ -4,6 +4,9 @@ Changelog
 
 1.1.2
 -----
+
+* added check, if the type is in the typesUseViewActionInListings properties
+
 * added more link on the portlet footer, wich show an standard recently_modified_view
 
 1.1.1
