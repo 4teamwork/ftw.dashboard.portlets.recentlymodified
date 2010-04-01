@@ -2,6 +2,10 @@ Changelog
 =========
 
 
+1.1.4
+-----
+
+
 1.1.3
 -----
 * fixed errors in the page template
