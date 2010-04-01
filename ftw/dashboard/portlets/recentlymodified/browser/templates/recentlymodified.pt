@@ -47,4 +47,11 @@
         No items changed yet.
     </dd>
 
+    <dd class="portletFooter" tal:condition="view/recent_items">
+        <a href=""
+           tal:attributes="href view/more_link"
+           i18n:translate="box_morelink">
+                More&hellip;
+        </a>
+    </dd>
 </dl>

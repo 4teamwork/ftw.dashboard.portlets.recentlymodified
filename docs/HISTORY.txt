@@ -4,9 +4,9 @@ Changelog
 
 1.1.2
 -----
+* added more link on the portlet footer, wich show an standard recently_modified_view
 
-
-1.2
+1.1.1
 ---
 * fixed bug: working now also with none section, then it search over the whole portal (section = portal)
 

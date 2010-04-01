@@ -2,7 +2,7 @@ from zope import schema
 from zope.component import getMultiAdapter
 from zope.formlib import form
 from zope.interface import implements
-from zope.component import adapts, getUtility
+from zope.component import getUtility
 
 from plone.app.portlets.portlets import base
 from plone.memoize import ram
@@ -14,7 +14,6 @@ from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
-from Products.CMFCore.interfaces._content import IFolderish
 from Products.statusmessages.interfaces import IStatusMessage
 
 from plone.portlets.interfaces import IPortletManager
@@ -122,6 +121,20 @@ class Renderer(base.Renderer):
         
         
         return self.catalog(query)[:limit]
+    
+    def more_link(self):
+        references = self.context.portal_catalog({
+            'path' : {
+                'query' : self.portal_path + str(self.data.section), 
+                'depth' : 0,
+            }
+        })
+        if references:
+            if self.context.portal_type == "Topic":
+                references[0].getURL()
+            else:
+                return '%s/recently_modified_view' % references[0].getURL()
+        
 
 
 class AddForm(base.AddForm):
@@ -171,5 +184,9 @@ class AddPortlet(object):
         return self.context.REQUEST.RESPONSE.redirect(self.context.absolute_url())
 
 class QuickPreview(BrowserView):
+    """
+    """
+
+class RecentlyModifiedView(BrowserView):
     """
     """
