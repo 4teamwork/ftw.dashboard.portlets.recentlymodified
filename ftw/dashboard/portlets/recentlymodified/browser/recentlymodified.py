@@ -134,7 +134,8 @@ class Renderer(base.Renderer):
                 references[0].getURL()
             else:
                 return '%s/recently_modified_view' % references[0].getURL()
-        
+        else:
+            return '%s/recently_modified_view' % self.context.absolute_url()
 
 
 class AddForm(base.AddForm):

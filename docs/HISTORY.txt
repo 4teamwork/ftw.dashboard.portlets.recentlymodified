@@ -4,7 +4,7 @@ Changelog
 
 1.1.4
 -----
-
+* fixed the more link, work now with a portal recentlymodified portlet
 
 1.1.3
 -----
