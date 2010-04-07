@@ -23,18 +23,26 @@
             
             <span class="title">
                 <img tal:replace="structure item_icon/html_tag" />
-                
-                <a tal:attributes="href string:${obj/getURL}/quick_preview"
-                   class="recentlymodified_item" title="Vorschau zeigen">
-                    <img tal:attributes="src string:${context/absolute_url}/info_icon.gif" alt=""/>
-                </a>
-                <a href=""
-                   tal:attributes="href python: obj.portal_type in use_view_action and '%s/view' % obj.getURL() or obj.getURL();
-                                   title obj/Description;
-                                   class string:$item_wf_state_class"
-                    tal:content="obj/pretty_title_or_id">
-                    Title
-                </a>
+                <tal:def tal:define="preview_link python: (context.portal_properties.get('ftw.dashboard', False) and context.portal_properties.get('ftw.dashboard').getProperty('preview_link', False))" >
+                    <tal:cond tal:condition="preview_link">
+                        <a tal:attributes="href string:${obj/getURL}/quick_preview"
+                           class="recentlymodified_item" title="Vorschau zeigen">
+                            <img tal:attributes="src string:${context/absolute_url}/info_icon.gif" alt=""/>
+                        </a>
+                        <a href=""
+                           tal:attributes="href python: obj.portal_type in use_view_action and '%s/view' % obj.getURL() or obj.getURL();
+                                           title obj/Description;
+                                           class string:$item_wf_state_class"
+                            tal:content="obj/pretty_title_or_id">
+                            Title
+                        </a>
+                    </tal:cond>
+                    <tal:cond tal:condition="not: preview_link">
+                        <a tal:attributes="href string:${obj/getURL}/quick_preview; title obj/Description;" tal:content="obj/pretty_title_or_id" class="recentlymodified_item" title="Vorschau zeigen">
+                            <img tal:attributes="src string:${context/absolute_url}/info_icon.gif" alt=""/>
+                        </a>
+                    </tal:cond>
+                </tal:def>
                 <span class="portletItemDetails"
                       tal:content="python:toLocalizedTime(obj.ModificationDate)"
                       >May 5</span>

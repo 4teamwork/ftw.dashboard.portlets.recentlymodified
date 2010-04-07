@@ -4,6 +4,9 @@ Changelog
 
 1.1.4
 -----
+* added the property preview_link to the ftw.dashboard portal_properties. 
+  True: i-icon = preview, title = link to the object, False: title = preview
+
 * fixed the more link, work now with a portal recentlymodified portlet
 
 1.1.3

@@ -22,10 +22,19 @@ It implement the document action "wach changes", wich add a recentlyModified Por
 
 The items show the title (link to the current Object) and the last change date. The Number of items can be set on the edit Page.
 
+
+Properties:
+===========
+
+The ftw.dashboard.portles.recentlymodified add the preview_link to the ftw.dashbord portal_properties.
+This rules are valid: 
+True: i-icon = show preview, title = link to the object, 
+False: i-icon = not displayed, title = show preview 
+
 State:
 ======
 
-Beta
+Final
 
 Copyright and credits
 =====================
