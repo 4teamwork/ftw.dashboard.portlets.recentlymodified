@@ -2,6 +2,10 @@ Changelog
 =========
 
 
+1.1.5
+-----
+
+
 1.1.4
 -----
 * added the property preview_link to the ftw.dashboard portal_properties. 
