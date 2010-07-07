@@ -2,9 +2,13 @@ Changelog
 =========
 
 
-1.1.5
+1.2.0
 -----
+
+* fixed some templates and css styles, so that it work's fine with plone4
+  [07.07.2010, phgross]
 * fixed portlet, so that it work too on a Topic 
+  [phgross]
 
 1.1.4
 -----
