@@ -19,7 +19,7 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
       url='http://plone.org/products/ftw.dashboard.portlets.recentlymodified/',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['ftw', 'ftw.dashboard'],
+      namespace_packages=['ftw', 'ftw.dashboard', 'ftw.dashboard.portlets'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[

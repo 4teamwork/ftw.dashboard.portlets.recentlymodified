@@ -5,6 +5,9 @@ Changelog
 1.2.0
 -----
 
+* fixed namespaces in setup.py
+  [phgross, 29.07.2010]
+
 * fixed some templates and css styles, so that it work's fine with plone4
   [07.07.2010, phgross]
 * fixed portlet, so that it work too on a Topic 
