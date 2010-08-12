@@ -4,7 +4,7 @@
 	<property name="addable_portlets" type="lines" purge="false">
 	   	<element value="ftw.dashboard.portlets.recentlymodified"/>
   	</property>
-	<property name="preview_link" type="boolean">True</property>
+	<property name="preview_link" type="boolean">False</property>
  </object>
  <object name="pipbox_properties"  meta_type="Plone Property Sheet">
 	<property name="selector_specs" type="lines" purge="True">

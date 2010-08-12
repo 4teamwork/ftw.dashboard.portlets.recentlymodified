@@ -5,6 +5,9 @@ Changelog
 1.2.0
 -----
 
+* change functionality of the preview_link property (for more details read README.txt)
+  [phgross, 12.08.2010]
+
 * fixed namespaces in setup.py
   [phgross, 29.07.2010]
 

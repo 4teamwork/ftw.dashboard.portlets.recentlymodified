@@ -27,9 +27,9 @@ Properties:
 ===========
 
 The ftw.dashboard.portles.recentlymodified add the preview_link to the ftw.dashbord portal_properties.
-This rules are valid: 
-True: i-icon = show preview, title = link to the object, 
-False: i-icon = not displayed, title = show preview 
+This rules are valid:
+True: i-icon = show preview, title = link to the object,
+False: i-icon = not displayed, title = link to the object,
 
 State:
 ======
