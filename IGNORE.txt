@@ -1,4 +1,4 @@
-# created by: svn propset svn:ignore -F ./IGNORE.txt .
+# created by: svn propset svn:ignore -F ./IGNORE.TXT .
 
 ftw.dashboard.portlets.recentlymodified.egg-info
 build
