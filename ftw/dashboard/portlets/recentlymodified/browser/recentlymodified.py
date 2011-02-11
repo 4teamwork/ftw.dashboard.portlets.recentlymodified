@@ -88,7 +88,9 @@ class Renderer(base.Renderer):
         if len(brains) == 1:
             section_title = brains[0].Title.decode('utf-8')
         else:
-            section_title = self.portal.Title().decode('utf-8')
+            section_title = self.portal.Title()
+        if not isinstance(section_title, unicode):
+            section_title = section_title.decode('utf-8')
         return _(u"recent_changes_in", default=u"Recent Changes in ${section}", mapping={u"section" : section_title})
 
     @memoize
