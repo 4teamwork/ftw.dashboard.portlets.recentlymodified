@@ -10,6 +10,7 @@
     <include package="plone.app.portlets" />
     <include package=".browser" />
 
+    <includeDependencies package="." />
 
     <!-- Register the installation GenericSetup extension profile -->
     <genericsetup:registerProfile
