@@ -1,6 +1,11 @@
 <dl class="portlet portletRecent"
+
+
+
     tal:define="use_view_action python: context.portal_properties.site_properties.getProperty('typesUseViewActionInListings', ())"
     i18n:domain="plone">
+
+
 
     <dt class="portletHeader clearfix">
 	  	<span class="portletTopLeft"></span>
@@ -20,9 +25,9 @@
                         item_wf_state obj/review_state;
                         item_wf_state_class python:'state-' + normalizeString(item_wf_state);
                         item_type_class python:'contenttype-' + normalizeString(obj.portal_type)"
-                        
+
             tal:attributes="class python:oddrow and  'portletItem even' or 'portletItem odd'">
-            
+
             <span class="title">
                 <img tal:replace="structure item_icon/html_tag" />
                 <tal:def tal:define="preview_link python: (context.portal_properties.get('ftw.dashboard', False) and context.portal_properties.get('ftw.dashboard').getProperty('preview_link', False))" >

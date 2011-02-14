@@ -1,0 +1,111 @@
+Metadata-Version: 1.0
+Name: ftw.dashboard.portlets.recentlymodified
+Version: 1.2.1-dev
+Summary: recentlymodified portlet - auge
+Home-page: http://plone.org/products/ftw.dashboard.portlets.recentlymodified/
+Author: philippegross
+Author-email: mailto:info@4teamwork.ch
+License: GPL
+Description: Introduction
+        ============
+        the ftw.dashboard.portlets.recentlyModified paket, implements the recentlyModified Portlet, wich show the last changes from a determined section.
+        
+        
+        How to use ftw.dashboard.recentlyModified
+        =========================================
+        
+        1.) Install the ftw.dashboard.portlets.recentlyModified product with the portal_setup tool.
+        
+        2.) On every content page you can see now the document action "wach changes" wich add a recentlyModified Portlet from the current section.
+        
+        3.) follow the changes from the current section on your dashboard ...
+        
+        
+        Description:
+        ============
+        
+        The recentlyModified portlet is a usefull plone 3 portlet for your dashboard.
+        
+        It implement the document action "wach changes", wich add a recentlyModified Portlet from the current section.
+        
+        The items show the title (link to the current Object) and the last change date. The Number of items can be set on the edit Page.
+        
+        
+        Properties:
+        ===========
+        
+        The ftw.dashboard.portles.recentlymodified add the preview_link to the ftw.dashbord portal_properties.
+        This rules are valid:
+        True: i-icon = show preview, title = link to the object,
+        False: i-icon = not displayed, title = link to the object,
+        
+        State:
+        ======
+        
+        Final
+        
+        Copyright and credits
+        =====================
+        
+        ftw.dashboard.portlets.recentlyModified is copyright 2009 by 4teamwork_ , and is licensed under the GPL. See LICENSE.txt for details.
+        
+        .. _4teamwork: http://www.4teamwork.ch/
+        
+        Changelog
+        =========
+        
+        
+        1.2.1
+        -----
+        
+        
+        1.2.0
+        -----
+        
+        * change functionality of the preview_link property (for more details read README.txt)
+          [phgross, 12.08.2010]
+        
+        * fixed namespaces in setup.py
+          [phgross, 29.07.2010]
+        
+        * fixed some templates and css styles, so that it work's fine with plone4
+          [07.07.2010, phgross]
+        * fixed portlet, so that it work too on a Topic 
+          [phgross]
+        
+        1.1.4
+        -----
+        * added the property preview_link to the ftw.dashboard portal_properties. 
+          True: i-icon = preview, title = link to the object, False: title = preview
+        
+        * fixed the more link, work now with a portal recentlymodified portlet
+        
+        1.1.3
+        -----
+        * fixed errors in the page template
+        
+        1.1.2
+        -----
+        
+        * added check, if the type is in the typesUseViewActionInListings properties
+        
+        * added more link on the portlet footer, wich show an standard recently_modified_view
+        
+        1.1.1
+        ---
+        * fixed bug: working now also with none section, then it search over the whole portal (section = portal)
+        
+        1.1
+        ---
+        * added Lightbox preview functionality, with the Product pipox.
+        
+        * changed the link to the standard view of the respectively type
+        
+        1.0
+        ---
+        
+        initial release
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

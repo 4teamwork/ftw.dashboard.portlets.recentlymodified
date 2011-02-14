@@ -1,0 +1,3 @@
+ftw
+ftw.dashboard
+ftw.dashboard.portlets

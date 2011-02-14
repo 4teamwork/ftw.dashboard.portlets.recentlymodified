@@ -25,9 +25,12 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
       install_requires=[
           'setuptools',
           'Products.pipbox',
+          'collective.js.jqshorten',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
-      # -*- Entry points: -*-
-      """,
+        # -*- Entry points: -*-
+        [z3c.autoinclude.plugin]
+        target = plone
+        """,
       )

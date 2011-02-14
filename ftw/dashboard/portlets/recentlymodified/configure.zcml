@@ -19,7 +19,11 @@
       description="ftw dashboard portlets recentlymodified"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-     
+
+    <browser:resource
+      name="recentlymodified.shorten-long-text.js"
+      file="recentlymodified.shorten-long-text.js" />
+
     <!-- Register locales translations -->
     <i18n:registerTranslations directory="locales" />
 
