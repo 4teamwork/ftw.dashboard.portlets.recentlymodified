@@ -5,7 +5,7 @@ version = open("ftw/dashboard/portlets/recentlymodified/version.txt").read().str
 
 setup(name='ftw.dashboard.portlets.recentlymodified',
       version=version,
-      description="recentlymodified portlet - auge",
+      description="recentlymodified portlet",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
