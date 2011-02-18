@@ -3,9 +3,9 @@
     i18n:domain="plone">
 
     <dt class="portletHeader clearfix">
-	  	<span class="portletTopLeft"></span>
+          <span class="portletTopLeft"></span>
         <span tal:content="view/title">Recent Changes</span>
-      	<span class="portletTopRight"></span>
+          <span class="portletTopRight"></span>
     </dt>
 
     <tal:items tal:define="plone_view context/@@plone;
@@ -21,11 +21,11 @@
                         item_wf_state obj/review_state;
                         item_wf_state_class python:'state-' + normalizeString(item_wf_state);
                         item_type_class python:'contenttype-' + normalizeString(obj.portal_type)"
-                        
+
             tal:attributes="class python:oddrow and  'portletItem even' or 'portletItem odd'">
             <span class="title">
                 <img tal:replace="structure item_icon/html_tag" />
-                <tal:def tal:define="preview_link python: (context.portal_properties.get('ftw.dashboard', False) and context.portal_properties.get('ftw.dashboard').getProperty('preview_link', False))" >
+                <tal:def tal:define="preview_link python: (context.portal_properties.get('ftw.dashboard', False) and 			context.portal_properties.get('ftw.dashboard').getProperty('preview_link', False))" >
                     <tal:cond tal:condition="preview_link">
                         <a tal:attributes="href string:${obj/getURL}/quick_preview"
                            class="recentlymodified_item" title="Vorschau zeigen">
@@ -39,28 +39,21 @@
                             Title
                         </a>
                     </tal:cond>
-                    <tal:cond tal:condition="not: preview_link">
-                        <a href=""
-                           tal:condition="python:item_type_class == 'contenttype-file'"
-                           tal:attributes="href python: obj.portal_type in use_view_action and '%s/view' % obj.getURL() or obj.getURL();
-                                           title obj/Description;
-                                           class string:$item_wf_state_class">
-                            <img tal:attributes="src string:${portal_url}/${obj/getIcon}" alt='' />
-                            <span tal:content="obj/pretty_title_or_id" />
+					<tal:cond tal:condition="not: preview_link">
+
+					<!-- divs used to fix ie bug -->
+					<div>
+ 						<img class="left-img" tal:attributes="src string:${portal_url}/${obj/getIcon}" alt='' />
+						</div><div>
+                        <a href="" class="recently-link"
+										tal:attributes="href python: obj.portal_type in use_view_action and '%s/view' % obj.getURL() or
+                          					obj.getURL();
+                                           	title obj/Description;">
+                            <span tal:replace="obj/pretty_title_or_id" />
                         </a>
-                        <a href=""
-                           tal:condition="python:item_type_class != 'contenttype-file'"
-                           tal:attributes="href python: obj.portal_type in use_view_action and '%s/view' % obj.getURL() or obj.getURL();
-                                           title obj/Description;
-                                           class string:$item_wf_state_class ${item_type_class}"
-                            tal:content="obj/pretty_title_or_id">
-                            Title
-                        </a>
+						<div>
                     </tal:cond>
                 </tal:def>
-                <span class="portletItemDetails"
-                      tal:content="python:toLocalizedTime(obj.ModificationDate)"
-                      >May 5</span>
             </span>
         </dd>
     </tal:items>

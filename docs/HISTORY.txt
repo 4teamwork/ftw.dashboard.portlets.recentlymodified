@@ -5,6 +5,7 @@ Changelog
 1.2.1
 -----
 
+* added jquery.smartTruncation to truncate long text
 
 1.2.0
 -----
@@ -17,12 +18,12 @@ Changelog
 
 * fixed some templates and css styles, so that it work's fine with plone4
   [07.07.2010, phgross]
-* fixed portlet, so that it work too on a Topic 
+* fixed portlet, so that it work too on a Topic
   [phgross]
 
 1.1.4
 -----
-* added the property preview_link to the ftw.dashboard portal_properties. 
+* added the property preview_link to the ftw.dashboard portal_properties.
   True: i-icon = preview, title = link to the object, False: title = preview
 
 * fixed the more link, work now with a portal recentlymodified portlet

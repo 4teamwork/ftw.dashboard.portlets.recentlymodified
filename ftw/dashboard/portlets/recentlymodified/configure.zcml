@@ -22,8 +22,13 @@
       />
 
     <browser:resource
-      name="recentlymodified.shorten-long-text.js"
-      file="recentlymodified.shorten-long-text.js" />
+      name="recentlymodified.truncate-long-text.js"
+      file="recentlymodified.truncate-long-text.js" />
+
+  	<browser:resourceDirectory
+      name="ftw.dashboard.recentlymodified.resources"
+      directory="resources"
+      />
 
     <!-- Register locales translations -->
     <i18n:registerTranslations directory="locales" />

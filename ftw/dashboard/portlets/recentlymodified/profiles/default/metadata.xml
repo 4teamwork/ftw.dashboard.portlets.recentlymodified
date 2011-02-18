@@ -3,6 +3,6 @@
   <version>1</version>
   <dependencies>
     <dependency>profile-Products.pipbox:default</dependency>
-    <dependency>profile-collective.js.jqshorten:default</dependency>
+    <dependency>profile-collective.js.jqsmartTruncation:default</dependency>
   </dependencies>
 </metadata>
