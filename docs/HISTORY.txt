@@ -6,6 +6,7 @@ Changelog
 -----
 
 * added jquery.smartTruncation to truncate long text
+  [elio.schmutz]
 
 1.2.0
 -----
