@@ -132,8 +132,8 @@ class Renderer(base.Renderer):
             }
         })
         if references:
-            if self.context.portal_type == "Topic":
-                references[0].getURL()
+            if references[0].getObject().portal_type == "Topic":
+                return '%s' % references[0].getURL()
             else:
                 return '%s/recently_modified_view' % references[0].getURL()
         else:

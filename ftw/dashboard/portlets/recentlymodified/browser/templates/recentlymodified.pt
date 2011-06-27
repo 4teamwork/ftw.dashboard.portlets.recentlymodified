@@ -9,7 +9,6 @@
     </dt>
 
     <tal:items tal:define="plone_view context/@@plone;
-                           getIcon nocall:plone_view/getIcon;
                            normalizeString nocall:plone_view/normalizeString;
                            toLocalizedTime nocall:plone_view/toLocalizedTime;
                            portal_url context/@@plone_portal_state/portal_url;"
@@ -17,14 +16,12 @@
 
         <dd class="portletItem"
             tal:define="oddrow repeat/obj/odd;
-                        item_icon python:getIcon(obj);
                         item_wf_state obj/review_state;
                         item_wf_state_class python:'state-' + normalizeString(item_wf_state);
                         item_type_class python:'contenttype-' + normalizeString(obj.portal_type)"
 
             tal:attributes="class python:oddrow and  'portletItem even' or 'portletItem odd'">
             <span class="title">
-                <img tal:replace="structure item_icon/html_tag" />
                 <tal:def tal:define="preview_link python: (context.portal_properties.get('ftw.dashboard', False) and 			context.portal_properties.get('ftw.dashboard').getProperty('preview_link', False))" >
                     <tal:cond tal:condition="preview_link">
                         <a tal:attributes="href string:${obj/getURL}/quick_preview"
