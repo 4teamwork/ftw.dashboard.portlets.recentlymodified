@@ -9,10 +9,11 @@ Install
 
 - Add ``ftw.dashboard.portlets.recentlyModified`` to your buildout configuration
 
-:: 
-  [instance]
-  eggs = 
-    ftw.dashboard.portlets.recentlyModified
+::
+
+    [instance]
+    eggs = 
+        ftw.dashboard.portlets.recentlyModified
     
 - Run buildout
 
