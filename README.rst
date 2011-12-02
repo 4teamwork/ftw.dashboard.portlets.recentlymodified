@@ -1,31 +1,31 @@
 Overview
 ========
-the ``ftw.dashboard.portlets.recentlyModified`` implements a 
+the ``ftw.dashboard.portlets.recentlymodified`` implements a 
 recentlyModified Portlet, which shows the last changes from a defined section.
 
 
 Install
 ======
 
-- Add ``ftw.dashboard.portlets.recentlyModified`` to your buildout configuration
+- Add ``ftw.dashboard.portlets.recentlymodified`` to your buildout configuration
 
 ::
 
     [instance]
     eggs = 
-        ftw.dashboard.portlets.recentlyModified
+        ftw.dashboard.portlets.recentlymodified
     
 - Run buildout
 
-- Install ``ftw.dashboard.portlets.recentlyModified`` in portal_setup
+- Install ``ftw.dashboard.portlets.recentlymodified`` in portal_setup
 
 
 Links
 =====
 
-- Package repository: https://github.com/4teamwork/ftw.dashboard.portlets.recentlyModified
-- Issue tracker: https://github.com/4teamwork/ftw.dashboard.portlets.recentlyModified/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.dashboard.portlets.recentlyModified
+- Package repository: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified
+- Issue tracker: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified/issues
+- Package on pypi: http://pypi.python.org/pypi/ftw.dashboard.portlets.recentlymodified
 
 
 Maintainer
