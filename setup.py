@@ -1,23 +1,28 @@
 from setuptools import setup, find_packages
 import os
 
-version = open("ftw/dashboard/portlets/recentlymodified/version.txt").read().strip()
+version = '1.2.2dev'
+maintainer = 'Philipp Gross'
 
 setup(name='ftw.dashboard.portlets.recentlymodified',
       version=version,
-      description="recentlymodified portlet",
-      long_description=open("README.txt").read() + "\n" +
+      description="Recently modified portlet for the dashboard",
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      # Get more strings from
+      # http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
+        "Framework :: Plone",
+        "Framework :: Zope2",
+        "Framework :: Plone :: 4.0",
         "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
+        "Topic :: Software Development :: Libraries :: Python Modules", ],
       keywords='',
-      author='philippegross',
+      author='4teamwork GmbH',
+      maintainer=maintainer,
       author_email='mailto:info@4teamwork.ch',
-      url='http://plone.org/products/ftw.dashboard.portlets.recentlymodified/',
-      license='GPL',
+      url='https://github.com/maethu/ftw.dashboard.portlets.recentlyModified',
+      license='GPL2',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['ftw', 'ftw.dashboard', 'ftw.dashboard.portlets'],
       include_package_data=True,
