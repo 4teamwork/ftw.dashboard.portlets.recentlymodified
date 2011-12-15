@@ -3,6 +3,10 @@ import os
 
 version = '1.2.2dev'
 maintainer = 'Philipp Gross'
+tests_require = ['zope.testing',
+                 'plone.app.testing',
+                 'plone.mocktestcase',
+                 ]
 
 setup(name='ftw.dashboard.portlets.recentlymodified',
       version=version,
@@ -27,6 +31,8 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
       namespace_packages=['ftw', 'ftw.dashboard', 'ftw.dashboard.portlets'],
       include_package_data=True,
       zip_safe=False,
+      tests_require=tests_require,
+      extras_require=dict(tests=tests_require),
       install_requires=[
           'setuptools',
           'Products.pipbox',
