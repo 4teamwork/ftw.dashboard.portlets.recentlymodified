@@ -29,12 +29,12 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                        description=_(u"How many items to list."),
                        required=True,
                        default=5)
-                       
+
     section = schema.Choice(title=_(u"Section"),
                             description=_(u"Only changes in the selected section will be displayed."),
                             required=True,
                             source=SearchableTextSourceBinder({}, default_query='path:'))
-                       
+
 
     #section = schema.Choice(title=_(u"Section"),
     #                     description=_(u"Only changes in the selected section will be displayed."),
@@ -74,7 +74,7 @@ class Renderer(base.Renderer):
 
         plone_tools = getMultiAdapter((context, self.request), name=u'plone_tools')
         self.catalog = plone_tools.catalog()
-        
+
     #@ram.cache(_render_cachekey)
     def render(self):
         return xhtml_compress(self._template())
@@ -91,7 +91,7 @@ class Renderer(base.Renderer):
             section_title = self.portal.Title()
         if not isinstance(section_title, unicode):
             section_title = section_title.decode('utf-8')
-        return _(u"recent_changes_in", default=u"Recent Changes in ${section}", mapping={u"section" : section_title})
+        return _(u"recent_changes_in", default=u"${section}", mapping={u"section" : section_title})
 
     @memoize
     def _data(self):
@@ -110,24 +110,24 @@ class Renderer(base.Renderer):
             query = {
                 'path' : self.portal_path + str(self.data.section),
             }
-        
+
         query["sort_on"] = 'modified'
         query["sort_order"] = 'reverse'
         query["sort_limit"] = limit
         if "portal_type" in query.keys():
             if type(query["portal_type"]) not in (list,tuple):
-                query["portal_type"] = list(query["portal_type"])    
+                query["portal_type"] = list(query["portal_type"])
             query["portal_type"] = filter(lambda a: a in self.typesToShow, query["portal_type"])
         else:
             query["portal_type"] = self.typesToShow
-        
-        
+
+
         return self.catalog(query)[:limit]
-    
+
     def more_link(self):
         references = self.context.portal_catalog({
             'path' : {
-                'query' : self.portal_path + str(self.data.section), 
+                'query' : self.portal_path + str(self.data.section),
                 'depth' : 0,
             }
         })
@@ -141,23 +141,23 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    
+
     form_fields = form.Fields(IRecentlyModifiedPortlet)
     label = _(u"Add recently modified Portlet")
     description = _(u"This portlet displays recently modified content in a selected section.")
-    
+
     def create(self, data):
-        
+
         return Assignment(count=data.get('count', 5), section=data.get('section', None))
 
 class EditForm(base.EditForm):
     form_fields = form.Fields(IRecentlyModifiedPortlet)
     label = _(u"Edit recently modified Portlet")
     description = _(u"This portlet displays recently modified content in a selected section.")
-    
-    
+
+
 class AddPortlet(object):
-    
+
     def __call__(self):
         # This is only for a 'recently modified'-user-portlet in dashboard column 1 now, not at all abstracted
         column_manager = getUtility(IPortletManager, name='plone.dashboard1')
@@ -166,7 +166,7 @@ class AddPortlet(object):
         column = column_manager.get(USER_CATEGORY, {}).get(userid, {})
         id_base = 'recentlyModified'
         id = 0
-        
+
         while id_base + str(id) in column.keys():
             id += 1
         portal_state = getMultiAdapter((self.context, self.context.REQUEST), name=u'plone_portal_state')
@@ -178,7 +178,7 @@ class AddPortlet(object):
         if context_path != portal_path:
             relative_context_path = context_path.replace(portal_path, '')
         column[id_base + str(id)] = Assignment(count=5, section=relative_context_path)
-    
+
         request = getattr(self.context, 'REQUEST', None)
         if request is not None:
             title = self.context.title_or_id().decode('utf-8')

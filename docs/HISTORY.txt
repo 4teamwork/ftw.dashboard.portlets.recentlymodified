@@ -5,12 +5,19 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
+- #532 Text "Letzte Aenderungen in" bei RecentlyModified Portlet im Titel entfernen
+  https://extranet.4teamwork.ch/intranet/10-interne-projekte/4teamwork-egov/tracker-4teamwork-egov/532/
+  adjust title of portlet
+  [eschmutz]
+  
+- add tests
+  [eschmutz]
 
 1.2.1 (2011-03-30)
 ------------------
 
 - added jquery.smartTruncation to truncate long text
-  [elio.schmutz]
+  [eschmutz]
 
 
 1.2.0
