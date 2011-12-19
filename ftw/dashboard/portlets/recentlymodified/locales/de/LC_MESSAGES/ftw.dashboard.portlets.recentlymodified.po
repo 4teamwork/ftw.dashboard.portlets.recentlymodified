@@ -56,13 +56,11 @@ msgstr "Änderungen verfolgen"
 
 #. Default: "${section}"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:94
-#, fuzzy
 msgid "recent_changes_in"
 msgstr "${section}"
 
 #. Default: "recently modified Portlet"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:53
-#, fuzzy
 msgid "title_recentlyModifed_portlet"
 msgstr "Letzte Änderungen Portlet"
 
