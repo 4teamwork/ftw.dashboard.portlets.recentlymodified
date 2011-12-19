@@ -5,9 +5,7 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- #532 Text "Letzte Aenderungen in" bei RecentlyModified Portlet im Titel entfernen
-  https://extranet.4teamwork.ch/intranet/10-interne-projekte/4teamwork-egov/tracker-4teamwork-egov/532/
-  adjust title of portlet
+- adjust title of portlet
   [eschmutz]
   
 - add tests
