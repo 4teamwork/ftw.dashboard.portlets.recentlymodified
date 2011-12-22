@@ -67,20 +67,20 @@ class TestPortlet(unittest.TestCase):
 
     def test_data(self):
         r = self.renderer('/folder1')
-        self.assertEqual(r._data() > 0, True)
-        # Public method should return the same
-        self.assertEqual(r._data(), r.recent_items())
+        self.assertEqual(r.recent_items() > 0, True)
 
     def test_more_link(self):
         r = self.renderer('/folder1')
         url = r.more_link()
         portal = self.layer['portal']
-        expected_url = '%s/recently_modified_view' % portal.folder1.absolute_url()
+        expected_url = '%s/recently_modified_view' % \
+            portal.folder1.absolute_url()
         self.assertEqual(url, expected_url)
 
     def test_add_portlet_with_addview(self):
         portal = self.layer['portal']
-        portal.folder1.restrictedTraverse('ftw.dashboard.addRecentlyModified')()
+        portal.folder1.restrictedTraverse(
+            'ftw.dashboard.addRecentlyModified')()
 
         manager = getUtility(IPortletManager, name='plone.dashboard1')
         column = manager.get(USER_CATEGORY, {}).get(TEST_USER_ID, {})
