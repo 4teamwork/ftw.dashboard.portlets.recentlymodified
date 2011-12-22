@@ -1,27 +1,24 @@
-from zope import schema
-from zope.component import getMultiAdapter
-from zope.formlib import form
-from zope.interface import implements
-from zope.component import getUtility
-
+from Acquisition import aq_inner
+from ftw.dashboard.portlets.recentlymodified import _
+from plone.app.portlets.cache import render_cachekey
 from plone.app.portlets.portlets import base
+from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.memoize import ram
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
+from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.cache import render_cachekey
-from plone.app.vocabularies.catalog import SearchableTextSourceBinder
-
+from plone.portlets.interfaces import IPortletManager
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
-from Products.statusmessages.interfaces import IStatusMessage
-
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.constants import USER_CATEGORY
-
-from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from ftw.dashboard.portlets.recentlymodified import _
+from Products.statusmessages.interfaces import IStatusMessage
+from zope import schema
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.formlib import form
+from zope.interface import implements
+
 
 class IRecentlyModifiedPortlet(IPortletDataProvider):
 
@@ -30,16 +27,13 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                        required=True,
                        default=5)
 
-    section = schema.Choice(title=_(u"Section"),
-                            description=_(u"Only changes in the selected section will be displayed."),
-                            required=True,
-                            source=SearchableTextSourceBinder({}, default_query='path:'))
+    section = schema.Choice(
+        title=_(u"Section"),
+        description=_(
+            u"Only changes in the selected section will be displayed."),
+        required=True,
+        source=SearchableTextSourceBinder({}, default_query='path:'))
 
-
-    #section = schema.Choice(title=_(u"Section"),
-    #                     description=_(u"Only changes in the selected section will be displayed."),
-     #                    required=True,
-      #                   source=SearchableTextSourceBinder({}, default_query='path:'))
 
 class Assignment(base.Assignment):
     implements(IRecentlyModifiedPortlet)
@@ -50,12 +44,15 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        return _(u"title_recentlyModifed_portlet", default=u"recently modified Portlet")
+        return _(u"title_recentlyModifed_portlet",
+                 default=u"recently modified Portlet")
+
 
 def _render_cachekey(fun, self):
     if self.anonymous:
         raise ram.DontCache()
     return render_cachekey(fun, self)
+
 
 class Renderer(base.Renderer):
     _template = ViewPageTemplateFile('templates/recentlymodified.pt')
@@ -64,15 +61,20 @@ class Renderer(base.Renderer):
         base.Renderer.__init__(self, *args)
 
         context = aq_inner(self.context)
-        portal_state = getMultiAdapter((context, self.request), name=u'plone_portal_state')
+        portal_state = getMultiAdapter(
+            (context, self.request),
+            name=u'plone_portal_state')
         self.anonymous = portal_state.anonymous()
         self.portal = portal_state.portal()
         self.portal_path = '/'.join(self.portal.getPhysicalPath())
         self.portal_url = portal_state.portal_url()
         self.typesToShow = portal_state.friendly_types()
-        self.typesToShow = [type_ for type_ in self.typesToShow if type_ not in ['Image',]]
+        self.typesToShow = \
+            [type_ for type_ in self.typesToShow if type_ not in ['Image', ]]
 
-        plone_tools = getMultiAdapter((context, self.request), name=u'plone_tools')
+        plone_tools = getMultiAdapter(
+            (context, self.request),
+            name=u'plone_tools')
         self.catalog = plone_tools.catalog()
 
     #@ram.cache(_render_cachekey)
@@ -84,7 +86,9 @@ class Renderer(base.Renderer):
 
     @property
     def title(self):
-        brains = self.catalog(path={'query' : self.portal_path + str(self.data.section), 'depth' : 0})
+        brains = self.catalog(
+            path={'query': self.portal_path + str(self.data.section),
+                  'depth': 0})
         if len(brains) == 1:
             section_title = brains[0].Title.decode('utf-8')
         else:
@@ -98,26 +102,25 @@ class Renderer(base.Renderer):
         limit = self.data.count
 
         references = self.context.portal_catalog({
-            'path' : {
-                    'query' : self.portal_path + str(self.data.section),
-                    'depth' : 0,
-                     }
-            })
+            'path': {'query': self.portal_path + str(self.data.section),
+                     'depth': 0, }})
 
-        if references and len(references)>0 and references[0].portal_type == "Topic":
+        if references and len(references)>0 and \
+            references[0].portal_type == "Topic":
             query = references[0].getObject().buildQuery()
         else:
             query = {
-                'path' : self.portal_path + str(self.data.section),
+                'path': self.portal_path + str(self.data.section),
             }
 
         query["sort_on"] = 'modified'
         query["sort_order"] = 'reverse'
         query["sort_limit"] = limit
         if "portal_type" in query.keys():
-            if type(query["portal_type"]) not in (list,tuple):
+            if type(query["portal_type"]) not in (list, tuple):
                 query["portal_type"] = list(query["portal_type"])
-            query["portal_type"] = filter(lambda a: a in self.typesToShow, query["portal_type"])
+            query["portal_type"] = filter(
+                lambda a: a in self.typesToShow, query["portal_type"])
         else:
             query["portal_type"] = self.typesToShow
 
@@ -126,11 +129,8 @@ class Renderer(base.Renderer):
 
     def more_link(self):
         references = self.context.portal_catalog({
-            'path' : {
-                'query' : self.portal_path + str(self.data.section),
-                'depth' : 0,
-            }
-        })
+            'path': {'query': self.portal_path + str(self.data.section),
+                     'depth': 0, }})
         if references:
             if references[0].getObject().portal_type == "Topic":
                 return '%s' % references[0].getURL()
@@ -144,22 +144,27 @@ class AddForm(base.AddForm):
 
     form_fields = form.Fields(IRecentlyModifiedPortlet)
     label = _(u"Add recently modified Portlet")
-    description = _(u"This portlet displays recently modified content in a selected section.")
+    description = _(u"This portlet displays recently"
+        u" modified content in a selected section.")
 
     def create(self, data):
+        return Assignment(
+            count=data.get('count', 5),
+            section=data.get('section', ''))
 
-        return Assignment(count=data.get('count', 5), section=data.get('section', ''))
 
 class EditForm(base.EditForm):
     form_fields = form.Fields(IRecentlyModifiedPortlet)
     label = _(u"Edit recently modified Portlet")
-    description = _(u"This portlet displays recently modified content in a selected section.")
+    description = _(u"This portlet displays recently" \
+        u" modified content in a selected section.")
 
 
 class AddPortlet(object):
 
     def __call__(self):
-        # This is only for a 'recently modified'-user-portlet in dashboard column 1 now, not at all abstracted
+        # This is only for a 'recently modified'-user-portlet in dashboard
+        # column 1 now, not at all abstracted
         column_manager = getUtility(IPortletManager, name='plone.dashboard1')
         membership_tool = getToolByName(self.context, 'portal_membership')
         userid = membership_tool.getAuthenticatedMember().getId()
@@ -169,7 +174,9 @@ class AddPortlet(object):
 
         while id_base + str(id) in column.keys():
             id += 1
-        portal_state = getMultiAdapter((self.context, self.context.REQUEST), name=u'plone_portal_state')
+        portal_state = getMultiAdapter(
+            (self.context, self.context.REQUEST),
+            name=u'plone_portal_state')
         context_path = '/'.join(self.context.getPhysicalPath())
         portal = portal_state.portal()
         portal_path = '/'.join(portal.getPhysicalPath())
@@ -177,7 +184,9 @@ class AddPortlet(object):
 
         if context_path != portal_path:
             relative_context_path = context_path.replace(portal_path, '')
-        column[id_base + str(id)] = Assignment(count=5, section=relative_context_path)
+        column[id_base + str(id)] = Assignment(
+            count=5,
+            section=relative_context_path)
 
         request = getattr(self.context, 'REQUEST', None)
         if request is not None:
@@ -188,13 +197,18 @@ class AddPortlet(object):
                 # versions it may be unicode in certain circumstances.
                 title = title.encode('utf-8')
 
-            message = _(u"${title} added to dashboard.", mapping={'title' : title})
+            message = _(
+                u"${title} added to dashboard.",
+                mapping={'title': title})
             IStatusMessage(request).addStatusMessage(message, type="info")
-        return self.context.REQUEST.RESPONSE.redirect(self.context.absolute_url())
+        return self.context.REQUEST.RESPONSE.redirect(
+            self.context.absolute_url())
+
 
 class QuickPreview(BrowserView):
     """
     """
+
 
 class RecentlyModifiedView(BrowserView):
     """
