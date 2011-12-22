@@ -77,12 +77,11 @@ class TestPortlet(unittest.TestCase):
         portal = self.layer['portal']
         expected_url = '%s/recently_modified_view' % portal.folder1.absolute_url()
         self.assertEqual(url, expected_url)
-    
+
     def test_add_portlet_with_addview(self):
         portal = self.layer['portal']
         portal.folder1.restrictedTraverse('ftw.dashboard.addRecentlyModified')()
-        
+
         manager = getUtility(IPortletManager, name='plone.dashboard1')
         column = manager.get(USER_CATEGORY, {}).get(TEST_USER_ID, {})
         self.assertEqual(column.keys() > 1, True)
-        
