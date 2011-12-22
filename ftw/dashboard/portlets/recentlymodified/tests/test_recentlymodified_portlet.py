@@ -7,6 +7,8 @@ from plone.portlets.interfaces import IPortletType
 from Products.GenericSetup.utils import _getDottedName
 from zope.component import getUtility, getMultiAdapter
 from zope.i18n import translate
+from plone.app.testing import TEST_USER_ID
+from plone.portlets.constants import USER_CATEGORY
 import unittest2 as unittest
 
 
@@ -35,48 +37,52 @@ class TestPortlet(unittest.TestCase):
         self.failUnless(
             recentlymodified.IRecentlyModifiedPortlet.providedBy(portlet))
 
-    def testRenderer(self):
+    def renderer(self, section=''):
         context = self.layer['portal']
         request = self.layer['request']
         view = context.restrictedTraverse('@@plone')
         manager = getUtility(
             IPortletManager, name='plone.rightcolumn', context=context)
-        assignment = recentlymodified.Assignment()
+        assignment = recentlymodified.Assignment(section=section)
 
         renderer = getMultiAdapter(
             (context, request, view, manager, assignment), IPortletRenderer)
+        return renderer
 
-        self.failUnless(isinstance(renderer, recentlymodified.Renderer))
+    def test_portlet_renderer(self):
+        self.failUnless(isinstance(
+            self.renderer(), recentlymodified.Renderer))
 
-
-class TestRenderer(unittest.TestCase):
-    """ Tests for the renderer class of the recentlymodifiedportlet
-    """
-
-    layer = FTW_RECENTLYMODIFIED_INTEGRATION_TESTING
-
-    def renderer(
-        self,
-        context=None,
-        request=None,
-        view=None,
-        manager=None,
-        assignment=None):
-
-        context = context or self.layer['portal']
-        request = request or self.layer['request']
-        view = view or context.restrictedTraverse('@@plone')
-        manager = manager or getUtility(
-            IPortletManager, name='plone.rightcolumn', context=context)
-        assignment = assignment or recentlymodified.Assignment()
-
-        return getMultiAdapter(
-            (context, request, view, manager, assignment), IPortletRenderer)
-
-    def test_title(self):
-
+    def test_title_no_section(self):
+        """Title should return the portal title or the"""
         r = self.renderer()
         context_title = self.layer['portal'].Title()
         portlet_title = translate(r.title)
 
         self.assertEqual(context_title, portlet_title)
+
+    def test_title_with_section(self):
+        r = self.renderer('/folder1')
+        self.assertEqual(r.title, 'Folder1')
+
+    def test_data(self):
+        r = self.renderer('/folder1')
+        self.assertEqual(r._data() > 0, True)
+        # Public method should return the same
+        self.assertEqual(r._data(), r.recent_items())
+
+    def test_more_link(self):
+        r = self.renderer('/folder1')
+        url = r.more_link()
+        portal = self.layer['portal']
+        expected_url = '%s/recently_modified_view' % portal.folder1.absolute_url()
+        self.assertEqual(url, expected_url)
+    
+    def test_add_portlet_with_addview(self):
+        portal = self.layer['portal']
+        portal.folder1.restrictedTraverse('ftw.dashboard.addRecentlyModified')()
+        
+        manager = getUtility(IPortletManager, name='plone.dashboard1')
+        column = manager.get(USER_CATEGORY, {}).get(TEST_USER_ID, {})
+        self.assertEqual(column.keys() > 1, True)
+        

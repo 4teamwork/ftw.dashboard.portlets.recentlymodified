@@ -91,7 +91,7 @@ class Renderer(base.Renderer):
             section_title = self.portal.Title()
         if not isinstance(section_title, unicode):
             section_title = section_title.decode('utf-8')
-        return _(u"recent_changes_in", default=u"${section}", mapping={u"section" : section_title})
+        return section_title
 
     @memoize
     def _data(self):
@@ -148,7 +148,7 @@ class AddForm(base.AddForm):
 
     def create(self, data):
 
-        return Assignment(count=data.get('count', 5), section=data.get('section', None))
+        return Assignment(count=data.get('count', 5), section=data.get('section', ''))
 
 class EditForm(base.EditForm):
     form_fields = form.Fields(IRecentlyModifiedPortlet)
