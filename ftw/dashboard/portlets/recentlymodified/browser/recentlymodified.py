@@ -181,7 +181,13 @@ class AddPortlet(object):
 
         request = getattr(self.context, 'REQUEST', None)
         if request is not None:
-            title = self.context.title_or_id().decode('utf-8')
+
+            title = self.context.Title() or self.context.id
+            if isinstance(title, unicode):
+                # The title is usually encoded in utf8, but in some dexterity
+                # versions it may be unicode in certain circumstances.
+                title = title.encode('utf-8')
+
             message = _(u"${title} added to dashboard.", mapping={'title' : title})
             IStatusMessage(request).addStatusMessage(message, type="info")
         return self.context.REQUEST.RESPONSE.redirect(self.context.absolute_url())
