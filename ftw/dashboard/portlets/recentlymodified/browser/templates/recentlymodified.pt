@@ -46,7 +46,7 @@ tal:attributes="class python:oddrow and  'portletItem even' or 'portletItem odd'
                         <tal:cond tal:condition="not: preview_link">
 
                             <!-- divs used to fix ie bug -->
-                            <div>
+                            <div tal:condition="obj/getIcon">
                                 <img class="left-img" tal:attributes="src string:${portal_url}/${obj/getIcon}" alt='' />
                                 </div><div>
                                 <a href="" class="recently-link"

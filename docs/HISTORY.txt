@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Portlet rendering: do not display icon if there is none.
+  [jone]
+
 - Add recently modified portlet: do not use title_or_id for dexterity support.
   [jone]
 
