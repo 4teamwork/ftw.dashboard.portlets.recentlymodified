@@ -1,18 +1,19 @@
 from Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from ftw.dashboard.portlets.recentlymodified import _
 from plone.app.portlets.cache import render_cachekey
 from plone.app.portlets.portlets import base
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.memoize import ram
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
 from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component import getUtility
@@ -83,6 +84,10 @@ class Renderer(base.Renderer):
 
     def recent_items(self):
         return self._data()
+
+    def get_contettype_class_for(self, brain):
+        normalize = getUtility(IIDNormalizer).normalize
+        return 'contenttype-%s' % normalize(brain.portal_type)
 
     @property
     def title(self):
