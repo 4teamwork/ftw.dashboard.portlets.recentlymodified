@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Fixed indent, added missing semicolon.
+  [Julian Infanger]
+
 - Portlet rendering: add content type css class.
   [jone]
 
