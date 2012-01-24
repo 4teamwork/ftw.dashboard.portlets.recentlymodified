@@ -204,7 +204,7 @@ class AddPortlet(object):
 
             message = _(
                 u"${title} added to dashboard.",
-                mapping={'title': title})
+                mapping={'title': title.decode('utf8')})
             IStatusMessage(request).addStatusMessage(message, type="info")
         return self.context.REQUEST.RESPONSE.redirect(
             self.context.absolute_url())
