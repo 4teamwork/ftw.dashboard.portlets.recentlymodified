@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Fixed typo in actions description.
+  [Julian Infanger]
+
 - Fixed UnicodeDecodeError occurs on pages with Umlaute.
   [Julian Infanger]
 

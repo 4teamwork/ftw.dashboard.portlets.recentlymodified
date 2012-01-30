@@ -27,7 +27,7 @@ msgstr "Letzte Änderungen Portlet bearbeiten"
 #. Default: "Follow changes in this context in your personal dashboard."
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
 msgid "Follow changes in this context in your personal dashboard."
-msgstr "In ihrem persönlichen Dashboard Änderungen dieses Abschnittes verfolgen"
+msgstr "Auf Ihrem persönlichen Dashboard Änderungen dieses Abschnittes verfolgen"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:29
 msgid "How many items to list."
