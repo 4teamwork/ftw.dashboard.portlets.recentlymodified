@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Removed div around images and added class for sprites.
+  [Julian Infanger]
+
 - Fixed typo in actions description.
   [Julian Infanger]
 

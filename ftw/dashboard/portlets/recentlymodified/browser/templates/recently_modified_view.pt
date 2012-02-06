@@ -40,7 +40,7 @@
                 <dt tal:define="item_icon python:plone_view.getIcon(result);
                                 item_wf_state result/review_state;
                                 item_wf_state_class python:'state-' + normalizeString(item_wf_state);">
-                    <span tal:attributes="class python:'contenttype-' + normalizeString(result.portal_type)">
+                    <span tal:attributes="class python:'typeIcon contenttype-' + normalizeString(result.portal_type)">
                       <img tal:replace="structure item_icon/html_tag" />
                       <a href="/view"
                          tal:content="result/pretty_title_or_id"
