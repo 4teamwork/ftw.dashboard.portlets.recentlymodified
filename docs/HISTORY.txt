@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Added some French translations
+  [ttschanz]
+
 - Removed div around images and added class for sprites.
   [Julian Infanger]
 
