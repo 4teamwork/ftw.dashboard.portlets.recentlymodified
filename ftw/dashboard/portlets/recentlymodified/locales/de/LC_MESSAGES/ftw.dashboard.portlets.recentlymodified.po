@@ -18,7 +18,7 @@ msgstr "Portlet zum Beobachten der Änderungen in '${title}' wurde zum Dashboard
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:146
 msgid "Add recently modified Portlet"
-msgstr "Lezte Änderungen Portlet hinzugefügt"
+msgstr "Letzte Änderungen Portlet hinzugefügt"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:155
 msgid "Edit recently modified Portlet"
@@ -39,7 +39,7 @@ msgstr "Anzahl angezeigte Felder"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
 msgid "Only changes in the selected section will be displayed."
-msgstr "Nur Änderung im Selektierten Abschnitt werden angezeigt"
+msgstr "Nur Änderungen im Selektierten Abschnitt werden angezeigt"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
 msgid "Section"
