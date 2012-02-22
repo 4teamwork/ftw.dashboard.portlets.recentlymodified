@@ -34,9 +34,9 @@
     <form name="searchresults" action="" method="post" tal:condition="results"
                       tal:define="batch python:Batch(results, 20, int(b_start), orphan=1)">
 
-        <tal:results tal:repeat="result batch">
+        <dl>
+            <tal:results tal:repeat="result batch">
 
-            <dl>
                 <dt tal:define="item_icon python:plone_view.getIcon(result);
                                 item_wf_state result/review_state;
                                 item_wf_state_class python:'state-' + normalizeString(item_wf_state);">
@@ -67,9 +67,8 @@
                 <dd tal:content="result/Description">
                     Description
                 </dd>
-            </dl>
-
-        </tal:results>
+            </tal:results>
+        </dl>
 
         <div class="spacer">
         &nbsp;

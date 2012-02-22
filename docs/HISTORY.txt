@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Fixed HTML markup: only make one dl containing multiple dt- and dd-tags.
+  [Julian Infanger]
+
 - Added some French translations
   [ttschanz]
 
