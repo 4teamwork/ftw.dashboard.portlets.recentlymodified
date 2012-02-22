@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Show ModificationDate in recently modified portlet.
+  [Julian Infanger]
+
 - Fixed HTML markup: only make one dl containing multiple dt- and dd-tags.
   [Julian Infanger]
 
