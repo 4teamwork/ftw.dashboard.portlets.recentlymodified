@@ -59,6 +59,7 @@ tal:attributes="class python:oddrow and  'portletItem even' or 'portletItem odd'
                         </tal:cond>
                     </tal:def>
                 </span>
+                <span class="visualClear"><!-- --></span>
                 <span class="itemModified"
                       tal:content="python: toLocalizedTime(obj.ModificationDate, long_format=1)">
                     01.01.2000 12:00
