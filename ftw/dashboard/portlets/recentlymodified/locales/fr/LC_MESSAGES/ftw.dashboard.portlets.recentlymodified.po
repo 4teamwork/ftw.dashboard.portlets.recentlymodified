@@ -14,15 +14,15 @@ msgstr ""
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:185
 msgid "${title} added to dashboard."
-msgstr "Portlet pour l'observation des modifications dans '${title}' a été ajouté au portail"
+msgstr "Outil pour l'observation des modifications dans '${title}' a été ajouté au portail"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:146
 msgid "Add recently modified Portlet"
-msgstr "Ajouté les dernières modifications au Portlet"
+msgstr "Dernières modifications ajoutées à l'outil"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:155
 msgid "Edit recently modified Portlet"
-msgstr "Editer les dernières modifications du Portlet"
+msgstr "Editer les dernières modifications de l'outil"
 
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
 msgid "Follow changes in this context in your personal dashboard."
@@ -30,7 +30,7 @@ msgstr "Suivre les modifications sur votre portail personnel"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:29
 msgid "How many items to list."
-msgstr "Afficher quel nombre d'élément"
+msgstr "Combien de champs doivent être affichés"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
 msgid "Number of items to display"
@@ -46,7 +46,7 @@ msgstr "Paragraphe"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:147
 msgid "This portlet displays recently modified content in a selected section."
-msgstr "Ce Portlet affiche les dernieres modifications de contenu du paragraphe sélectionné"
+msgstr "Cet outil affiche les dernieres modifications de contenu du paragraphe sélectionné"
 
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
 msgid "Watch changes"
@@ -60,5 +60,6 @@ msgstr "Modification récente"
 #. Default: "recently modified Portlet"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:53
 msgid "title_recentlyModifed_portlet"
-msgstr "Dernière modification au Portlet"
+msgstr "Dernières modifications de l'outil"
+
 

@@ -13,5 +13,6 @@ msgstr ""
 "Domain: DOMAIN\n"
 
 msgid "Recently Modified Portlet"
-msgstr "Dernière modification au Portlet"
+msgstr "Dernières modifications de l'outil"
+
 
