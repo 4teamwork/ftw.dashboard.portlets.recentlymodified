@@ -5,6 +5,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Show contenttype class if there is no icon for this type.
+  [Julian Infanger]
+
 - Show ModificationDate in recently modified portlet.
   [Julian Infanger]
 
