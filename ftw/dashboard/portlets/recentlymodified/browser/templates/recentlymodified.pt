@@ -45,7 +45,7 @@
                         <tal:cond tal:condition="not: preview_link">
 
                             <span tal:condition="obj/getIcon">
-                                <img class="left-img" tal:attributes="src string:${portal_url}/${obj/getIcon}" alt='' />&nbsp;
+                                <img class="left-img" tal:attributes="src string:${portal_url}/${obj/getIcon}" alt='' />
                             </span>
                             <a href=""
                                tal:attributes="href python: obj.portal_type in use_view_action and '%s/view' % obj.getURL() or
