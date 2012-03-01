@@ -14,7 +14,7 @@ msgstr ""
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:185
 msgid "${title} added to dashboard."
-msgstr "Outil pour l'observation des modifications dans '${title}' a été ajouté au portail"
+msgstr "Outil pour l'observation des modifications dans '${title}' a été ajouté à la page d'accueil"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:146
 msgid "Add recently modified Portlet"
@@ -26,11 +26,11 @@ msgstr "Editer les dernières modifications de l'outil"
 
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
 msgid "Follow changes in this context in your personal dashboard."
-msgstr "Suivre les modifications sur votre portail personnel"
+msgstr "Suivre les modifications sur votre page d'accueil personnel"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:29
 msgid "How many items to list."
-msgstr "Combien de champs doivent être affichés"
+msgstr "Combien de champs doivent être affichés?"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
 msgid "Number of items to display"
