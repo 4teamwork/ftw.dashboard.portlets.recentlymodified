@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-15 14:35+0000\n"
+"POT-Creation-Date: 2012-03-02 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ftw.dashboard.portlets.recentlymodified\n"
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:185
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:216
 msgid "${title} added to dashboard."
 msgstr ""
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:146
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:161
 msgid "Add recently modified Portlet"
 msgstr ""
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:155
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:174
 msgid "Edit recently modified Portlet"
 msgstr ""
 
@@ -33,23 +33,15 @@ msgstr ""
 msgid "Follow changes in this context in your personal dashboard."
 msgstr ""
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:29
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
 msgid "How many items to list."
 msgstr ""
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:27
 msgid "Number of items to display"
 msgstr ""
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
-msgid "Only changes in the selected section will be displayed."
-msgstr ""
-
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
-msgid "Section"
-msgstr ""
-
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:147
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:162
 msgid "This portlet displays recently modified content in a selected section."
 msgstr ""
 
@@ -57,13 +49,18 @@ msgstr ""
 msgid "Watch changes"
 msgstr ""
 
-#. Default: "${section}"
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:94
-msgid "recent_changes_in"
+#. Default: "Search for section path, empty means search from root"
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
+msgid "help_section_path"
+msgstr ""
+
+#. Default: "Section"
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
+msgid "label_section_path"
 msgstr ""
 
 #. Default: "recently modified Portlet"
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:53
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:52
 msgid "title_recentlyModifed_portlet"
 msgstr ""
 

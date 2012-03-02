@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-15 14:35+0000\n"
+"POT-Creation-Date: 2012-03-02 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,15 +12,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:185
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:216
 msgid "${title} added to dashboard."
 msgstr "Portlet zum Beobachten der Änderungen in '${title}' wurde zum Dashboard hinzugefügt."
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:146
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:161
 msgid "Add recently modified Portlet"
 msgstr "Letzte Änderungen Portlet hinzugefügt"
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:155
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:174
 msgid "Edit recently modified Portlet"
 msgstr "Letzte Änderungen Portlet bearbeiten"
 
@@ -29,23 +29,15 @@ msgstr "Letzte Änderungen Portlet bearbeiten"
 msgid "Follow changes in this context in your personal dashboard."
 msgstr "Auf Ihrem persönlichen Dashboard Änderungen dieses Abschnittes verfolgen"
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:29
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
 msgid "How many items to list."
 msgstr "Wie viele Felder sollen aufgelistet werden"
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:28
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:27
 msgid "Number of items to display"
 msgstr "Anzahl angezeigte Felder"
 
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
-msgid "Only changes in the selected section will be displayed."
-msgstr "Nur Änderungen im Selektierten Abschnitt werden angezeigt"
-
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
-msgid "Section"
-msgstr "Abschnitt"
-
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:147
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:162
 msgid "This portlet displays recently modified content in a selected section."
 msgstr "Dieses Portlet zeigt die zuletzt veränderten Inahlte eines selektieren Abschnittes an"
 
@@ -54,14 +46,18 @@ msgstr "Dieses Portlet zeigt die zuletzt veränderten Inahlte eines selektieren 
 msgid "Watch changes"
 msgstr "Änderungen verfolgen"
 
-#. Default: "${section}"
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:94
-msgid "recent_changes_in"
-msgstr "${section}"
+#. Default: "Search for section path, empty means search from root"
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
+msgid "help_section_path"
+msgstr "Änderungen aus folgendem Bereich anzeigen. Falls keine Bereich angegeben wird, werden alle Änderungen vom Portal angezeigt."
+
+#. Default: "Section"
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
+msgid "label_section_path"
+msgstr "Bereich"
 
 #. Default: "recently modified Portlet"
-#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:53
+#: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:52
 msgid "title_recentlyModifed_portlet"
 msgstr "Letzte Änderungen Portlet"
-
 

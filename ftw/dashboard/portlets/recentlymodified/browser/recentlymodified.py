@@ -20,7 +20,6 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.formlib import form
 from zope.interface import implements
-from plone.app.portlets import PloneMessageFactory as _pap
 
 
 class IRecentlyModifiedPortlet(IPortletDataProvider):
@@ -31,11 +30,10 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                        default=5)
 
     section = schema.Choice(
-            title=_pap(u"label_navigation_root_path", default=u"Root node"),
-            description=_pap(u'help_navigation_root',
-                          default=u"You may search for and choose a folder "
-                                    "to act as the root of the navigation tree. "
-                                    "Leave blank to use the Plone site root."),
+            title=_(u"label_section_path", default=u"Section"),
+            description=_(u'help_section_path',
+                          default=u"Search for section path, "
+                                    "empty means search from root"),
             required=False,
             source=SearchableTextSourceBinder({'is_folderish': True},
                                               default_query='path:'))
