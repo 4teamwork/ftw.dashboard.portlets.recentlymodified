@@ -5,6 +5,12 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Use Ueberselection widget for path attribute.
+  [mathias.leimgruber]
+
+- section attr is no longer required.
+  [mathias.leimgruber]
+
 - Show contenttype class if there is no icon for this type.
   [Julian Infanger]
 

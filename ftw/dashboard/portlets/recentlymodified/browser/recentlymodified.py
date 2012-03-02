@@ -1,9 +1,6 @@
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.statusmessages.interfaces import IStatusMessage
 from ftw.dashboard.portlets.recentlymodified import _
+from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
 from plone.app.portlets.cache import render_cachekey
 from plone.app.portlets.portlets import base
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
@@ -14,11 +11,16 @@ from plone.memoize.instance import memoize
 from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.formlib import form
 from zope.interface import implements
+from plone.app.portlets import PloneMessageFactory as _pap
 
 
 class IRecentlyModifiedPortlet(IPortletDataProvider):
@@ -29,11 +31,15 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                        default=5)
 
     section = schema.Choice(
-        title=_(u"Section"),
-        description=_(
-            u"Only changes in the selected section will be displayed."),
-        required=True,
-        source=SearchableTextSourceBinder({}, default_query='path:'))
+            title=_pap(u"label_navigation_root_path", default=u"Root node"),
+            description=_pap(u'help_navigation_root',
+                          default=u"You may search for and choose a folder "
+                                    "to act as the root of the navigation tree. "
+                                    "Leave blank to use the Plone site root."),
+            required=False,
+            source=SearchableTextSourceBinder({'is_folderish': True},
+                                              default_query='path:'))
+
 
 
 class Assignment(base.Assignment):
@@ -104,10 +110,12 @@ class Renderer(base.Renderer):
 
     @memoize
     def _data(self):
+        section = self.data.section
+        if not section:
+            section = ''
         limit = self.data.count
-
         references = self.context.portal_catalog({
-            'path': {'query': self.portal_path + str(self.data.section),
+            'path': {'query': self.portal_path + str(section),
                      'depth': 0, }})
 
         if references and len(references)>0 and \
@@ -115,7 +123,7 @@ class Renderer(base.Renderer):
             query = references[0].getObject().buildQuery()
         else:
             query = {
-                'path': self.portal_path + str(self.data.section),
+                'path': self.portal_path + str(section),
             }
 
         query["sort_on"] = 'modified'
@@ -133,8 +141,11 @@ class Renderer(base.Renderer):
         return self.catalog(query)[:limit]
 
     def more_link(self):
+        section = self.data.section
+        if not section:
+            section = ''
         references = self.context.portal_catalog({
-            'path': {'query': self.portal_path + str(self.data.section),
+            'path': {'query': self.portal_path + str(section),
                      'depth': 0, }})
         if references:
             if references[0].getObject().portal_type == "Topic":
@@ -148,6 +159,7 @@ class Renderer(base.Renderer):
 class AddForm(base.AddForm):
 
     form_fields = form.Fields(IRecentlyModifiedPortlet)
+    form_fields['section'].custom_widget = UberSelectionWidget
     label = _(u"Add recently modified Portlet")
     description = _(u"This portlet displays recently"
         u" modified content in a selected section.")
@@ -160,6 +172,7 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     form_fields = form.Fields(IRecentlyModifiedPortlet)
+    form_fields['section'].custom_widget = UberSelectionWidget
     label = _(u"Edit recently modified Portlet")
     description = _(u"This portlet displays recently" \
         u" modified content in a selected section.")
