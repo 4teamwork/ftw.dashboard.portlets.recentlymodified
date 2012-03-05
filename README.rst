@@ -5,7 +5,7 @@ recentlyModified Portlet, which shows the last changes from a defined section.
 
 
 Install
-======
+=======
 
 - Add ``ftw.dashboard.portlets.recentlymodified`` to your buildout configuration
 
