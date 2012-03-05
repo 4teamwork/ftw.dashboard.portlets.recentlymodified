@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2.3dev'
+version = '1.2.3'
 maintainer = 'Philipp Gross'
 tests_require = ['zope.testing',
                  'plone.app.testing',
