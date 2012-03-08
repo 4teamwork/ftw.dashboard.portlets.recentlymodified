@@ -6,7 +6,6 @@
 	xmlns:plone="http://namespaces.plone.org/plone"
 	i18n_domain="ftw.dashboard.portlets.recentlymodified">
 
-    <include package="Products.pipbox" />
     <include package="plone.app.portlets" />
     <include package=".browser" />
 

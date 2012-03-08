@@ -35,7 +35,6 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
       extras_require=dict(tests=tests_require),
       install_requires=[
           'setuptools',
-          'Products.pipbox',
           'collective.js.jqsmartTruncation',
           # -*- Extra requirements: -*-
       ],

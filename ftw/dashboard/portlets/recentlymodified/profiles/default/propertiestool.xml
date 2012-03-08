@@ -6,9 +6,4 @@
   	</property>
 	<property name="preview_link" type="boolean">False</property>
  </object>
- <object name="pipbox_properties"  meta_type="Plone Property Sheet">
-	<property name="selector_specs" type="lines" purge="True">
-	   	<element value="{type:'overlay',subtype:'ajax',selector:'.recentlymodified_item',urlmatch:'',urlreplace:''}"/>
-  	</property>
- </object>
 </object>
