@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.4 (unreleased)
+1.2.4 (2012-03-12)
 ------------------
 
 - Removed unused product pipbox.
