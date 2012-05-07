@@ -18,13 +18,13 @@ class TestPortlet(unittest.TestCase):
 
     layer = FTW_RECENTLYMODIFIED_INTEGRATION_TESTING
 
-    def testPortletTypeRegistered(self):
+    def test_portlet_type_registered(self):
         portlet = getUtility(
             IPortletType, name='ftw.dashboard.portlets.recentlymodified')
         self.assertEquals(
             portlet.addview, 'ftw.dashboard.portlets.recentlymodified')
 
-    def testRegisteredInterfaces(self):
+    def test_registered_interfaces(self):
         portlet = getUtility(
             IPortletType, name='ftw.dashboard.portlets.recentlymodified')
         registered_interfaces = [_getDottedName(i) for i in portlet.for_]
@@ -32,7 +32,7 @@ class TestPortlet(unittest.TestCase):
         self.assertEquals(
             ['zope.interface.Interface', ], registered_interfaces)
 
-    def testInterfaces(self):
+    def test_interfaces(self):
         portlet = recentlymodified.Assignment()
         self.failUnless(
             recentlymodified.IRecentlyModifiedPortlet.providedBy(portlet))
@@ -85,3 +85,30 @@ class TestPortlet(unittest.TestCase):
         manager = getUtility(IPortletManager, name='plone.dashboard1')
         column = manager.get(USER_CATEGORY, {}).get(TEST_USER_ID, {})
         self.assertEqual(column.keys() > 1, True)
+
+    def test_get_contettype_class_for(self):
+        portal = self.layer['portal']
+        brain = portal.portal_catalog({'portal_type': 'Document'})[0]
+        self.assertEqual(
+            self.renderer().get_contettype_class_for(brain),
+            'contenttype-document')
+
+    def test_assignment_title(self):
+        portlet = recentlymodified.Assignment()
+        self.assertEqual(
+            portlet.title,
+            'title_recentlyModifed_portlet')
+
+    def test_section_is_topic(self):
+        portal = self.layer['portal']
+        portal.manage_addProduct['ATContentTypes'].addATTopic(
+            id='test_topic',
+            title='Test Topic')
+        topic = portal.test_topic
+        topic.reindexObject()
+        topic.addCriterion('Type', 'ATPortalTypeCriterion')
+        portal.REQUEST.set('crit__Type_ATPortalTypeCriterion_value',
+                           ['Document'])
+        topic.criterion_save()
+        r = self.renderer('/test_topic')
+        self.assertEqual(r.recent_items() > 0, True)

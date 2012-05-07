@@ -8,7 +8,7 @@ from zope.configuration import xmlconfig
 
 class FtwRecentlymodifiedLayer(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (PLONE_FIXTURE, )
 
     def setUpZope(self, app, configurationContext):
         # Load ZCML
@@ -31,4 +31,5 @@ class FtwRecentlymodifiedLayer(PloneSandboxLayer):
 
 FTW_RECENTLYMODIFIED_FIXTURE = FtwRecentlymodifiedLayer()
 FTW_RECENTLYMODIFIED_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(FTW_RECENTLYMODIFIED_FIXTURE,), name="FtwRecentlymodified:Integration")
+    bases=(FTW_RECENTLYMODIFIED_FIXTURE, ),
+    name="FtwRecentlymodified:Integration")

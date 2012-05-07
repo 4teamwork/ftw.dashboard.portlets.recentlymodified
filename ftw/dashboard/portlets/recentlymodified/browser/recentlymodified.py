@@ -1,11 +1,9 @@
 from Acquisition import aq_inner
 from ftw.dashboard.portlets.recentlymodified import _
 from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
-from plone.app.portlets.cache import render_cachekey
 from plone.app.portlets.portlets import base
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.i18n.normalizer.interfaces import IIDNormalizer
-from plone.memoize import ram
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
 from plone.portlets.constants import USER_CATEGORY
@@ -39,7 +37,6 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                                               default_query='path:'))
 
 
-
 class Assignment(base.Assignment):
     implements(IRecentlyModifiedPortlet)
 
@@ -51,12 +48,6 @@ class Assignment(base.Assignment):
     def title(self):
         return _(u"title_recentlyModifed_portlet",
                  default=u"recently modified Portlet")
-
-
-def _render_cachekey(fun, self):
-    if self.anonymous:
-        raise ram.DontCache()
-    return render_cachekey(fun, self)
 
 
 class Renderer(base.Renderer):
@@ -82,7 +73,6 @@ class Renderer(base.Renderer):
             name=u'plone_tools')
         self.catalog = plone_tools.catalog()
 
-    #@ram.cache(_render_cachekey)
     def render(self):
         return xhtml_compress(self._template())
 
@@ -186,10 +176,10 @@ class AddPortlet(object):
         userid = membership_tool.getAuthenticatedMember().getId()
         column = column_manager.get(USER_CATEGORY, {}).get(userid, {})
         id_base = 'recentlyModified'
-        id = 0
+        id_number = 0
 
-        while id_base + str(id) in column.keys():
-            id += 1
+        while id_base + str(id_number) in column.keys():
+            id_number += 1
         portal_state = getMultiAdapter(
             (self.context, self.context.REQUEST),
             name=u'plone_portal_state')
@@ -200,7 +190,7 @@ class AddPortlet(object):
 
         if context_path != portal_path:
             relative_context_path = context_path.replace(portal_path, '')
-        column[id_base + str(id)] = Assignment(
+        column[id_base + str(id_number)] = Assignment(
             count=5,
             section=relative_context_path)
 
@@ -222,10 +212,10 @@ class AddPortlet(object):
 
 
 class QuickPreview(BrowserView):
-    """
+    """Quick preview
     """
 
 
 class RecentlyModifiedView(BrowserView):
-    """
+    """Shows all recently modified items
     """
