@@ -5,7 +5,11 @@ Changelog
 1.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use new test buildout config
+  [mathias.leimgruber]
+
+- Added some tests.
+  [mathias.leimgruber]
 
 
 1.2.4 (2012-03-12)
