@@ -49,7 +49,7 @@ msgstr "Änderungen verfolgen"
 #. Default: "Search for section path, empty means search from root"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
 msgid "help_section_path"
-msgstr "Änderungen aus folgendem Bereich anzeigen. Falls keine Bereich angegeben wird, werden alle Änderungen vom Portal angezeigt."
+msgstr "Änderungen aus folgendem Bereich anzeigen. Falls kein Bereich angegeben wird, werden alle Änderungen vom Portal angezeigt."
 
 #. Default: "Section"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
