@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.6 (unreleased)
+1.2.6 (2012-10-16)
 ------------------
 
 - Fixed typo in translation.
