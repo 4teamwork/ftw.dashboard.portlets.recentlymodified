@@ -4,7 +4,6 @@ from ftw.dashboard.portlets.recentlymodified.testing \
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
-from Products.GenericSetup.utils import _getDottedName
 from zope.component import getUtility, getMultiAdapter
 from zope.i18n import translate
 from plone.app.testing import TEST_USER_ID
@@ -23,14 +22,6 @@ class TestPortlet(unittest.TestCase):
             IPortletType, name='ftw.dashboard.portlets.recentlymodified')
         self.assertEquals(
             portlet.addview, 'ftw.dashboard.portlets.recentlymodified')
-
-    def test_registered_interfaces(self):
-        portlet = getUtility(
-            IPortletType, name='ftw.dashboard.portlets.recentlymodified')
-        registered_interfaces = [_getDottedName(i) for i in portlet.for_]
-        registered_interfaces.sort()
-        self.assertEquals(
-            ['zope.interface.Interface', ], registered_interfaces)
 
     def test_interfaces(self):
         portlet = recentlymodified.Assignment()

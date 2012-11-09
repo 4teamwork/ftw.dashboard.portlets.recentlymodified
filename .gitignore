@@ -1,4 +1,5 @@
 *.egg-info
+buildout.cfg
 *.mo
 *.pyc
 .installed.cfg
