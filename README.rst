@@ -1,6 +1,7 @@
 Overview
 ========
-the ``ftw.dashboard.portlets.recentlymodified`` implements a
+
+The ``ftw.dashboard.portlets.recentlymodified`` implements a
 recentlyModified Portlet, which shows the last changes from a defined section.
 
 
@@ -26,10 +27,12 @@ Links
 - Package repository: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified
 - Issue tracker: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified/issues
 - Package on pypi: http://pypi.python.org/pypi/ftw.dashboard.portlets.recentlymodified
-- Continuous integration: https://jenkins.4teamwork.ch/search/?q=ftw.dashboard.portlets.recentlymodified
+- Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.dashboard.portlets.recentlymodified
 
 
 Maintainer
 ==========
 
-This package is produced and maintained by `4teamwork GmbH <http://www.4teamwork.ch/>`_.
+This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
+
+``ftw.dashboard.portlets.recentlymodified`` is licensed under GNU General Public License, version 2.
