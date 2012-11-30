@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="ftw.dashboard.portlets.recentlymodified">
+
+    <!-- 1 -> 1270 -->
+    <genericsetup:upgradeStep
+        title="Update actions description."
+        description=""
+        source="1"
+        destination="1270"
+        handler=".to1270.UpdateActionsDescription"
+        profile="ftw.dashboard.portlets.recentlymodified:default"
+        />
+
+    <genericsetup:registerProfile
+        name="1270"
+        title="ftw.dashboard.portlets.recentlymodified.upgrades.1270"
+        description=""
+        directory="profiles/1270"
+        for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+</configure>

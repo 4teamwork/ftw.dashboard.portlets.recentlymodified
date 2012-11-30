@@ -38,6 +38,7 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
 
       install_requires=[
           'setuptools',
+          'ftw.upgrade',
           'collective.js.jqsmartTruncation',
           # -*- Extra requirements: -*-
       ],
