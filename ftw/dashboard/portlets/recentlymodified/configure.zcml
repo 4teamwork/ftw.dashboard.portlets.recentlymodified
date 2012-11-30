@@ -8,6 +8,7 @@
 
     <include package="plone.app.portlets" />
     <include package=".browser" />
+    <include package=".upgrades" />
 
     <includeDependencies package="." />
 
