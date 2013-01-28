@@ -17,12 +17,14 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
 
       # Get more strings from
       # http://www.python.org/pypi?%3Aaction=list_classifiers
+
       classifiers=[
-        "Framework :: Plone",
-        "Framework :: Zope2",
-        "Framework :: Plone :: 4.0",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules", ],
+        'Framework :: Plone',
+        'Framework :: Plone :: 4.1',
+        'Framework :: Plone :: 4.2',
+        'Programming Language :: Python',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        ],
 
       keywords='ftw dashboard portlet recentlymodified',
       author='4teamwork GmbH',
