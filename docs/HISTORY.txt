@@ -5,6 +5,9 @@ Changelog
 1.2.7 (unreleased)
 ------------------
 
+- Replace jq by $.
+  [mathias.leimgruber]
+
 - Added upgradestep to add a description to action, wich is shown as tooltip.
   [Julian Infanger]
 
