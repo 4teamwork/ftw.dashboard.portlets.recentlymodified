@@ -9,6 +9,7 @@ from plone.memoize.instance import memoize
 from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
+from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -60,13 +61,17 @@ class Renderer(base.Renderer):
         portal_state = getMultiAdapter(
             (context, self.request),
             name=u'plone_portal_state')
+        registry = getUtility(IRegistry)
+        types_to_exclude = registry.get(
+                'ftw.dashboard.portlets.recentlymodified.types_to_exclude', [])
+
         self.anonymous = portal_state.anonymous()
         self.portal = portal_state.portal()
         self.portal_path = '/'.join(self.portal.getPhysicalPath())
         self.portal_url = portal_state.portal_url()
         self.typesToShow = portal_state.friendly_types()
         self.typesToShow = \
-            [type_ for type_ in self.typesToShow if type_ not in ['Image', ]]
+            [type_ for type_ in self.typesToShow if type_ not in types_to_exclude]
 
         plone_tools = getMultiAdapter(
             (context, self.request),
@@ -76,6 +81,7 @@ class Renderer(base.Renderer):
     def render(self):
         return xhtml_compress(self._template())
 
+    @memoize
     def recent_items(self):
         return self._data()
 
@@ -96,7 +102,6 @@ class Renderer(base.Renderer):
             section_title = section_title.decode('utf-8')
         return section_title
 
-    @memoize
     def _data(self):
         section = self.data.section
         if not section:
