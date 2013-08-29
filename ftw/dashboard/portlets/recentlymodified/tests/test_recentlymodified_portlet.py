@@ -1,9 +1,12 @@
 from ftw.dashboard.portlets.recentlymodified.browser import recentlymodified
 from ftw.dashboard.portlets.recentlymodified.testing \
     import FTW_RECENTLYMODIFIED_INTEGRATION_TESTING
+from ftw.builder import Builder
+from ftw.builder import create
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
+from plone.registry.interfaces import IRegistry
 from zope.component import getUtility, getMultiAdapter
 from zope.i18n import translate
 from plone.app.testing import TEST_USER_ID
@@ -53,24 +56,31 @@ class TestPortlet(unittest.TestCase):
         self.assertEqual(context_title, portlet_title)
 
     def test_title_with_section(self):
-        r = self.renderer('/folder1')
-        self.assertEqual(r.title, 'Folder1')
+        create(Builder('folder').titled('My Folder'))
+        r = self.renderer('/my-folder')
+        self.assertEqual(r.title, 'My Folder')
 
     def test_data(self):
-        r = self.renderer('/folder1')
-        self.assertEqual(r.recent_items() > 0, True)
+        create(Builder('folder'))
+
+        r = self.renderer('/folder')
+        self.assertEqual(r._data() > 0, True)
 
     def test_more_link(self):
-        r = self.renderer('/folder1')
+        create(Builder('folder'))
+
+        r = self.renderer('/folder')
         url = r.more_link()
         portal = self.layer['portal']
         expected_url = '%s/recently_modified_view' % \
-            portal.folder1.absolute_url()
+            portal.folder.absolute_url()
         self.assertEqual(url, expected_url)
 
     def test_add_portlet_with_addview(self):
+        create(Builder('folder'))
+
         portal = self.layer['portal']
-        portal.folder1.restrictedTraverse(
+        portal.folder.restrictedTraverse(
             'ftw.dashboard.addRecentlyModified')()
 
         manager = getUtility(IPortletManager, name='plone.dashboard1')
@@ -78,6 +88,9 @@ class TestPortlet(unittest.TestCase):
         self.assertEqual(column.keys() > 1, True)
 
     def test_get_contettype_class_for(self):
+        folder = create(Builder('folder'))
+        create(Builder('document').within(folder))
+
         portal = self.layer['portal']
         brain = portal.portal_catalog({'portal_type': 'Document'})[0]
         self.assertEqual(
@@ -102,4 +115,39 @@ class TestPortlet(unittest.TestCase):
                            ['Document'])
         topic.criterion_save()
         r = self.renderer('/test_topic')
-        self.assertEqual(r.recent_items() > 0, True)
+        self.assertEqual(r._data() > 0, True)
+
+    def test_caching_data_if_calling_public_data_method(self):
+        folder = create(Builder('folder'))
+        create(Builder('page').within(folder))
+
+        portlet_renderer = self.renderer()
+
+        self.assertEqual(len(portlet_renderer.recent_items()), 2)
+
+        create(Builder('folder'))
+
+        self.assertEqual(len(portlet_renderer.recent_items()), 2)
+        self.assertEqual(len(portlet_renderer._data()), 3)
+
+    def test_excludet_types_are_not_listed_in_portlet(self):
+        folder = create(Builder('folder'))
+        create(Builder('document').within(folder))
+        create(Builder('document').within(folder))
+
+        portlet_renderer = self.renderer()
+
+        self.assertEqual(
+            [brain.portal_type for brain in portlet_renderer._data()],
+            [u'Document', u'Document', u'Folder'])
+
+        registry = getUtility(IRegistry)
+        registry[
+            'ftw.dashboard.portlets.recentlymodified.types_to_exclude'] = [
+            u'Document']
+
+        portlet_renderer = self.renderer()
+
+        self.assertEqual(
+            [brain.portal_type for brain in portlet_renderer._data()],
+            [u'Folder'])
