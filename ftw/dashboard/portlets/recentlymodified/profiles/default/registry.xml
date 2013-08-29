@@ -1,0 +1,12 @@
+<registry>
+    <record name="ftw.dashboard.portlets.recentlymodified.types_to_exclude">
+        <field type="plone.registry.field.List">
+            <description>Add portaltypes you want to exclude from the recently modified portlet</description>
+            <title>Types to exclude</title>
+            <value_type type="plone.registry.field.TextLine" />
+        </field>
+        <value>
+            <element>Image</element>
+        </value>
+    </record>
+</registry>

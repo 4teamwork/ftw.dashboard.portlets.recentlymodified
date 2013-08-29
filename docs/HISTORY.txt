@@ -5,7 +5,8 @@ Changelog
 1.2.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add functionality to exclude portal_types over the plone.app.registry.
+  [elioschmutz]
 
 
 1.2.7 (2013-04-17)

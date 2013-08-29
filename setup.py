@@ -7,6 +7,8 @@ maintainer = 'Philipp Gross'
 tests_require = ['zope.testing',
                  'plone.app.testing',
                  'plone.mocktestcase',
+                 'ftw.builder',
+                 'ftw.testing [splinter]',
                  ]
 
 setup(name='ftw.dashboard.portlets.recentlymodified',
