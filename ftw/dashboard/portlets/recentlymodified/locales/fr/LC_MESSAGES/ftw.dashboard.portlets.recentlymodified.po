@@ -14,15 +14,15 @@ msgstr ""
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:216
 msgid "${title} added to dashboard."
-msgstr "Outil pour l'observation des modifications dans '${title}' a été ajouté à la page d'accueil"
+msgstr "Portlet pour l'observation des modifications dans '${title}' a été ajouté à la page d'accueil"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:161
 msgid "Add recently modified Portlet"
-msgstr "Dernières modifications ajoutées à l'outil"
+msgstr "Dernières modifications ajoutées au portlet"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:174
 msgid "Edit recently modified Portlet"
-msgstr "Editer les dernières modifications de l'outil"
+msgstr "Editer les dernières modifications du portlet"
 
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
 msgid "Follow changes in this context in your personal dashboard."
@@ -38,7 +38,7 @@ msgstr "Nombre de champs affichés"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:162
 msgid "This portlet displays recently modified content in a selected section."
-msgstr "Cet outil affiche les dernieres modifications de contenu du paragraphe sélectionné"
+msgstr "Ce portlet affiche les dernieres modifications de contenu du paragraphe sélectionné"
 
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
 msgid "Watch changes"
@@ -47,15 +47,16 @@ msgstr "Suivre les modifications"
 #. Default: "Search for section path, empty means search from root"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:34
 msgid "help_section_path"
-msgstr "Cet outil affiche les dernieres modifications de contenu du paragraphe sélectionné"
+msgstr "Cet portlet affiche les dernieres modifications de contenu du paragraphe sélectionné"
 
 #. Default: "Section"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:33
 msgid "label_section_path"
-msgstr "Paragraphe"
+msgstr "Secteur"
 
 #. Default: "recently modified Portlet"
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:52
 msgid "title_recentlyModifed_portlet"
-msgstr "Dernières modifications de l'outil"
+msgstr "Portlet dernières modifications"
+
 
