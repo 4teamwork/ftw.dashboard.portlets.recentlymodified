@@ -138,8 +138,8 @@ class TestPortlet(unittest.TestCase):
         portlet_renderer = self.renderer()
 
         self.assertEqual(
-            [brain.portal_type for brain in portlet_renderer._data()],
-            [u'Document', u'Document', u'Folder'])
+            sorted([brain.portal_type for brain in portlet_renderer._data()]),
+            sorted([u'Document', u'Document', u'Folder']))
 
         registry = getUtility(IRegistry)
         registry[
