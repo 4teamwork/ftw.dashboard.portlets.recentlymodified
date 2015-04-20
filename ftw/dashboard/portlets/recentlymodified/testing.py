@@ -1,10 +1,20 @@
-from ftw.builder.testing import BUILDER_LAYER
+from ftw.builder.session import BuilderSession
+from ftw.builder.testing import BUILDER_LAYER, set_builder_session_factory
+from ftw.testing import FunctionalSplinterTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import applyProfile
 from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login
 from zope.configuration import xmlconfig
+from zope.event import notify
+from zope.traversing.interfaces import BeforeTraverseEvent
+
+
+def functional_session_factory():
+    sess = BuilderSession()
+    sess.auto_commit = True
+    return sess
 
 
 class FtwRecentlymodifiedLayer(PloneSandboxLayer):
@@ -27,7 +37,20 @@ class FtwRecentlymodifiedLayer(PloneSandboxLayer):
         login(portal, TEST_USER_NAME)
 
 
+class FunctionalBrowserlayerTesting(FunctionalSplinterTesting):
+    """Support browserlayer"""
+
+    def setUpEnvironment(self, portal):
+        super(FunctionalBrowserlayerTesting, self).setUpEnvironment(portal)
+
+        notify(BeforeTraverseEvent(portal, portal.REQUEST))
+
+
 FTW_RECENTLYMODIFIED_FIXTURE = FtwRecentlymodifiedLayer()
 FTW_RECENTLYMODIFIED_INTEGRATION_TESTING = IntegrationTesting(
     bases=(FTW_RECENTLYMODIFIED_FIXTURE, ),
     name="FtwRecentlymodified:Integration")
+FTW_RECENTLYMODIFIED_FUNCTIONAL_TESTING = FunctionalBrowserlayerTesting(
+    bases=(FTW_RECENTLYMODIFIED_FIXTURE,
+           set_builder_session_factory(functional_session_factory)),
+    name="FtwRecentlymodified:Functional")

@@ -63,8 +63,10 @@ class Renderer(base.Renderer):
             name=u'plone_portal_state')
         registry = getUtility(IRegistry)
         types_to_exclude = registry.get(
-                'ftw.dashboard.portlets.recentlymodified.types_to_exclude', [])
-
+            'ftw.dashboard.portlets.recentlymodified.types_to_exclude', [])
+        self.exclude_members_folder = registry.get(
+            'ftw.dashboard.portlets.recentlymodified.exclude_members_folder',
+            True)
         self.anonymous = portal_state.anonymous()
         self.portal = portal_state.portal()
         self.portal_path = '/'.join(self.portal.getPhysicalPath())
@@ -130,8 +132,20 @@ class Renderer(base.Renderer):
         else:
             query["portal_type"] = self.typesToShow
 
+        items = self.catalog(query)
 
-        return self.catalog(query)[:limit]
+        # Remove items inside the members folder, they must not be displayed
+        # in the portlet.
+        if self.exclude_members_folder:
+            membership_tool = getToolByName(self.portal, 'portal_membership')
+            members_folder = membership_tool.getMembersFolder()
+            if members_folder:
+                members_folder_path = members_folder.getPhysicalPath()
+                members_folder_path = '/'.join(members_folder_path)
+                items = [item for item in items
+                         if not item.getPath().startswith(members_folder_path)]
+
+        return items[:limit]
 
     def more_link(self):
         section = self.data.section

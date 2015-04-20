@@ -9,4 +9,12 @@
             <element>Image</element>
         </value>
     </record>
+    <record name="ftw.dashboard.portlets.recentlymodified.exclude_members_folder">
+        <field type="plone.registry.field.Bool">
+            <description>Don't display members folder contents in the recently modified portlet</description>
+            <title>Exclude members folder</title>
+            <value_type type="plone.registry.field.Bool" />
+        </field>
+        <value>True</value>
+    </record>
 </registry>
