@@ -3,7 +3,13 @@ buildout.cfg
 *.mo
 *.pyc
 .installed.cfg
+.mr.developer.cfg
 bin/
+build/
+coverage/
 develop-eggs/
+dist/
 eggs/
 parts/
+src/
+var/
