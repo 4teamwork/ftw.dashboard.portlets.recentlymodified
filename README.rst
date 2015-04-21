@@ -60,7 +60,3 @@ Maintainer
 This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
 
 ``ftw.dashboard.portlets.recentlymodified`` is licensed under GNU General Public License, version 2.
-
-.. image:: https://cruel-carlota.pagodabox.com/5e16b442b4a12919d631bcb4697a74c8
-   :alt: githalytics.com
-   :target: http://githalytics.com/4teamwork/ftw.dashboard.portlets.recentlymodified
