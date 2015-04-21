@@ -5,6 +5,30 @@ The ``ftw.dashboard.portlets.recentlymodified`` implements a
 recentlyModified Portlet, which shows the last changes from a defined section.
 
 
+Compatibility
+=============
+
+Plone 4.1
+---------
+
+.. image:: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.1.x.cfg/badge/icon
+   :target: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.1.x.cfg
+
+
+Plone 4.2
+---------
+
+.. image:: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.2.x.cfg/badge/icon
+   :target: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.2.x.cfg
+
+
+Plone 4.3
+---------
+
+.. image:: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.3.x.cfg/badge/icon
+   :target: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.3.x.cfg
+
+
 Install
 =======
 
@@ -36,7 +60,3 @@ Maintainer
 This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
 
 ``ftw.dashboard.portlets.recentlymodified`` is licensed under GNU General Public License, version 2.
-
-.. image:: https://cruel-carlota.pagodabox.com/5e16b442b4a12919d631bcb4697a74c8
-   :alt: githalytics.com
-   :target: http://githalytics.com/4teamwork/ftw.dashboard.portlets.recentlymodified
