@@ -236,5 +236,45 @@ class QuickPreview(BrowserView):
 
 
 class RecentlyModifiedView(BrowserView):
-    """Shows all recently modified items
+    """Shows recently modified items of friendly types. Optionally the
+    contents from the members folder is excluded.
     """
+    def get_data(self):
+        # Get config options.
+        registry = getUtility(IRegistry)
+        types_to_exclude = registry.get(
+            'ftw.dashboard.portlets.recentlymodified.types_to_exclude', [])
+        exclude_members_folder = registry.get(
+            'ftw.dashboard.portlets.recentlymodified.exclude_members_folder',
+            True)
+
+        # Get info about the portal.
+        portal_state = getMultiAdapter((self.context, self.request),
+                                       name=u'plone_portal_state')
+        portal = portal_state.portal()
+        portal_path = '/'.join(portal.getPhysicalPath())
+
+        # Put together the query.
+        types_to_show = portal_state.friendly_types()
+        types_to_show = [type_ for type_ in types_to_show
+                         if type_ not in types_to_exclude]
+
+        query = {'path': portal_path, 'sort_on': 'modified',
+                 'sort_order': 'reverse', 'portal_type': types_to_show}
+
+        # Get the data.
+        catalog = getToolByName(self.context, 'portal_catalog')
+        data = catalog(query)
+
+        # Optionally remove items inside the members folder.
+        if exclude_members_folder:
+            membership_tool = getToolByName(portal, 'portal_membership')
+            members_folder = membership_tool.getMembersFolder()
+            if members_folder:
+                members_folder_path = members_folder.getPhysicalPath()
+                members_folder_path = '/'.join(members_folder_path)
+                data = [item for item in data
+                        if not item.getPath().startswith(members_folder_path)]
+
+        return data
+

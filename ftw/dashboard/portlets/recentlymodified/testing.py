@@ -1,5 +1,6 @@
 from ftw.builder.session import BuilderSession
 from ftw.builder.testing import BUILDER_LAYER, set_builder_session_factory
+import ftw.dashboard.portlets.recentlymodified.tests.builders
 from ftw.testing import FunctionalSplinterTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE

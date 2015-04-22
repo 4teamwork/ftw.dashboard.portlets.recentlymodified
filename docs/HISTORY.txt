@@ -5,8 +5,9 @@ Changelog
 1.2.9 (unreleased)
 ------------------
 
-- Exclude contents from the members folder (this is configurable in
-  plone.app.registry through
+- Exclude contents from the members folder and the custom
+  ``recently_modified_view`` (this is configurable in plone.app.registry
+  through
   ``ftw.dashboard.portlets.recentlymodified.exclude_members_folder``).
   [mbaechtold]
 

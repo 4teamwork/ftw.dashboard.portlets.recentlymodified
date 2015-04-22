@@ -4,12 +4,14 @@ import os
 version = '1.2.9.dev0'
 maintainer = 'Philipp Gross'
 
-tests_require = ['zope.testing',
-                 'plone.app.testing',
-                 'plone.mocktestcase',
-                 'ftw.builder',
-                 'ftw.testing [splinter]',
-                 ]
+tests_require = [
+    'ftw.builder',
+    'ftw.testbrowser',
+    'ftw.testing [splinter]',
+    'plone.app.testing',
+    'plone.mocktestcase',
+    'zope.testing',
+]
 
 setup(name='ftw.dashboard.portlets.recentlymodified',
       version=version,
