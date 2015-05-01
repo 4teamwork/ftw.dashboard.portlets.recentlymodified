@@ -5,7 +5,11 @@ Changelog
 1.2.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Exclude contents from the members folder and the custom
+  ``recently_modified_view`` (this is configurable in plone.app.registry
+  through
+  ``ftw.dashboard.portlets.recentlymodified.exclude_members_folder``).
+  [mbaechtold]
 
 
 1.2.8 (2013-09-23)
@@ -149,7 +153,7 @@ Changelog
 
 
 1.1.1
----
+-----
 
 - fixed bug: working now also with none section, then it search over the whole portal (section = portal)
 

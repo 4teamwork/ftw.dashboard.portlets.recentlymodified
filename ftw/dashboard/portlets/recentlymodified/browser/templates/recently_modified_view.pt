@@ -13,7 +13,7 @@
 
 <div metal:fill-slot="main"
      tal:define="path python:'/'.join(context.getPhysicalPath());
-                 results python:container.portal_catalog(sort_on='modified',sort_order='reverse',path=path);
+                 results view/get_data;
                  Batch python:modules['Products.CMFPlone'].Batch;
                  DateTime python:modules['DateTime'].DateTime;
                  b_start python:request.get('b_start',0);

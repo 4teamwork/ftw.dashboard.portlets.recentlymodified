@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>1280</version>
+  <version>1281</version>
   <dependencies>
     <dependency>profile-collective.js.jqsmartTruncation:default</dependency>
   </dependencies>
