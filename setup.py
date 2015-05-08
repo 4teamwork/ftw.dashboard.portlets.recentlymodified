@@ -31,7 +31,7 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
         ],
 
       keywords='ftw dashboard portlet recentlymodified',
-      author='4teamwork GmbH',
+      author='4teamwork AG',
       maintainer=maintainer,
       author_email='mailto:info@4teamwork.ch',
       url='https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified',
