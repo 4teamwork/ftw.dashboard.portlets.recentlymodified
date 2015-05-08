@@ -48,9 +48,9 @@ Install
 Links
 =====
 
-- Package repository: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified
-- Issue tracker: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.dashboard.portlets.recentlymodified
+- Github: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified
+- Issues: https://github.com/4teamwork/ftw.dashboard.portlets.recentlymodified/issues
+- Pypi: http://pypi.python.org/pypi/ftw.dashboard.portlets.recentlymodified
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.dashboard.portlets.recentlymodified
 
 
