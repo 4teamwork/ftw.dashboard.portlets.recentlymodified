@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.9 (unreleased)
+1.3.0 (2015-05-11)
 ------------------
 
 - Exclude contents from the members folder and the custom
