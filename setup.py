@@ -43,6 +43,7 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
       zip_safe=False,
 
       install_requires=[
+          'Plone',
           'setuptools',
           'ftw.upgrade',
           'collective.js.jqsmartTruncation',
