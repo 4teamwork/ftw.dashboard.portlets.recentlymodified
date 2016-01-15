@@ -5,7 +5,15 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix portlet creation if no ``UserPortletAssignmentMapping`` exists.
+  Normally, plone initialize a ``UserPortletAssignmentMapping``
+  for the ``dashboard`` on first login. If we use ldap-users, this
+  event will not be triggered correctly.
+  If we add a recentlymodifed portlet with such a user through the
+  "Watch changes"-action, the portlet will not be created.
+  This fix creates a ``UserPortletAssignmentMapping`` on portlet creation
+  if it does not exist.
+  [elioschmutz]
 
 
 1.3.0 (2015-05-11)

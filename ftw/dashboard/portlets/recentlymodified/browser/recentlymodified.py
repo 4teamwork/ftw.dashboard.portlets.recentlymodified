@@ -1,7 +1,12 @@
 from Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from ftw.dashboard.portlets.recentlymodified import _
 from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
 from plone.app.portlets.portlets import base
+from plone.app.portlets.storage import UserPortletAssignmentMapping
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.memoize.compress import xhtml_compress
@@ -10,10 +15,6 @@ from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
 from plone.registry.interfaces import IRegistry
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component import getUtility
@@ -190,14 +191,24 @@ class AddPortlet(object):
     def __call__(self):
         # This is only for a 'recently modified'-user-portlet in dashboard
         # column 1 now, not at all abstracted
-        column_manager = getUtility(IPortletManager, name='plone.dashboard1')
+        dashboard_name = 'plone.dashboard1'
+        column = getUtility(IPortletManager, name=dashboard_name)
         membership_tool = getToolByName(self.context, 'portal_membership')
         userid = membership_tool.getAuthenticatedMember().getId()
-        column = column_manager.get(USER_CATEGORY, {}).get(userid, {})
+        category = column.get(USER_CATEGORY, None)
+
+        manager = category.get(userid, None)
+        if manager is None:
+            manager = UserPortletAssignmentMapping(
+                manager=dashboard_name,
+                category=USER_CATEGORY,
+                name=userid)
+            category[userid] = manager
+
         id_base = 'recentlyModified'
         id_number = 0
 
-        while id_base + str(id_number) in column.keys():
+        while id_base + str(id_number) in manager.keys():
             id_number += 1
         portal_state = getMultiAdapter(
             (self.context, self.context.REQUEST),
@@ -209,7 +220,7 @@ class AddPortlet(object):
 
         if context_path != portal_path:
             relative_context_path = context_path.replace(portal_path, '')
-        column[id_base + str(id_number)] = Assignment(
+        manager[id_base + str(id_number)] = Assignment(
             count=5,
             section=relative_context_path)
 

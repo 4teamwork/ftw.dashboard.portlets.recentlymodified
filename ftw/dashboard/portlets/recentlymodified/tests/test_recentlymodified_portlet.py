@@ -77,15 +77,38 @@ class TestPortlet(unittest.TestCase):
         self.assertEqual(url, expected_url)
 
     def test_add_portlet_with_addview(self):
-        create(Builder('folder'))
+        folder = create(Builder('folder'))
 
-        portal = self.layer['portal']
-        portal.folder.restrictedTraverse(
+        column = getUtility(IPortletManager, name='plone.dashboard1')
+        category = column.get(USER_CATEGORY)
+
+        manager = category.get(TEST_USER_ID)
+
+        self.assertIsNone(
+            manager,
+            "The user manager should not yet exists because the user "
+            "have never logged in.")
+
+        folder.restrictedTraverse(
             'ftw.dashboard.addRecentlyModified')()
 
-        manager = getUtility(IPortletManager, name='plone.dashboard1')
-        column = manager.get(USER_CATEGORY, {}).get(TEST_USER_ID, {})
-        self.assertEqual(column.keys() > 1, True)
+        manager = category.get(TEST_USER_ID)
+        self.assertEqual(
+            'test_user_1_', manager.__name__,
+            "Because the user manager have not existed, it have been "
+            "created while adding the recentlymodified portlet")
+
+        self.assertEqual(
+            ['recentlyModified0'], manager._order,
+            "The recentlymodified portlet should have been created")
+
+        # We add another portlet
+        folder.restrictedTraverse(
+            'ftw.dashboard.addRecentlyModified')()
+
+        self.assertEqual(
+            ['recentlyModified0', 'recentlyModified1'], manager._order,
+            "The second portlet should be appended to the manager.")
 
     def test_get_contettype_class_for(self):
         folder = create(Builder('folder'))
