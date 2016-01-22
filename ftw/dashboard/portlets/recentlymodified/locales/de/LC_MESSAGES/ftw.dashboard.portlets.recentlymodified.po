@@ -39,7 +39,7 @@ msgstr "Anzahl angezeigte Felder"
 
 #: ./ftw/dashboard/portlets/recentlymodified/browser/recentlymodified.py:162
 msgid "This portlet displays recently modified content in a selected section."
-msgstr "Dieses Portlet zeigt die zuletzt veränderten Inahlte eines selektieren Abschnittes an"
+msgstr "Dieses Portlet zeigt die zuletzt veränderten Inhalte eines selektierten Abschnittes an"
 
 #. Default: "Watch changes"
 #: ./ftw/dashboard/portlets/recentlymodified/profiles/default/actions.xml
