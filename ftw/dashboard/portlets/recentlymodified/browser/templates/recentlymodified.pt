@@ -5,8 +5,8 @@
       i18n:domain="plone"
       tal:omit-tag="python: True">
 
-    <dl class="portlet portletRecent"
-        tal:define="use_view_action python: context.portal_properties.site_properties.getProperty('typesUseViewActionInListings', ())"
+    <dl tal:define="use_view_action python: context.portal_properties.site_properties.getProperty('typesUseViewActionInListings', ())"
+        tal:attributes="class string:portlet ${view/portletClass}"
         i18n:domain="plone">
 
         <dt class="portletHeader clearfix">

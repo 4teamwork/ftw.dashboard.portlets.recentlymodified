@@ -5,7 +5,8 @@ Changelog
 1.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update portlet template to make the portlet class more generic
+  [elioschmutz]
 
 
 1.3.2 (2016-01-22)
