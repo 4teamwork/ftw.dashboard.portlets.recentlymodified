@@ -8,25 +8,7 @@ recentlyModified Portlet, which shows the last changes from a defined section.
 Compatibility
 =============
 
-Plone 4.1
----------
-
-.. image:: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.1.x.cfg/badge/icon
-   :target: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.1.x.cfg
-
-
-Plone 4.2
----------
-
-.. image:: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.2.x.cfg/badge/icon
-   :target: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.2.x.cfg
-
-
-Plone 4.3
----------
-
-.. image:: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.3.x.cfg/badge/icon
-   :target: https://jenkins.4teamwork.ch/job/ftw.dashboard.portlets.recentlymodified-master-test-plone-4.3.x.cfg
+Supports Plone `4.2` and `4.3`.
 
 
 Install
