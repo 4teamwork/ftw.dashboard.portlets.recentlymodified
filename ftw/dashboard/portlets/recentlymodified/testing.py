@@ -1,15 +1,15 @@
 from ftw.builder.session import BuilderSession
 from ftw.builder.testing import BUILDER_LAYER, set_builder_session_factory
-import ftw.dashboard.portlets.recentlymodified.tests.builders
-from ftw.testing import FunctionalSplinterTesting
+from plone.app.testing import applyProfile
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import applyProfile
 from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login
 from zope.configuration import xmlconfig
 from zope.event import notify
 from zope.traversing.interfaces import BeforeTraverseEvent
+import ftw.dashboard.portlets.recentlymodified.tests.builders  # noqa
 
 
 def functional_session_factory():
@@ -38,7 +38,7 @@ class FtwRecentlymodifiedLayer(PloneSandboxLayer):
         login(portal, TEST_USER_NAME)
 
 
-class FunctionalBrowserlayerTesting(FunctionalSplinterTesting):
+class FunctionalBrowserlayerTesting(FunctionalTesting):
     """Support browserlayer"""
 
     def setUpEnvironment(self, portal):
