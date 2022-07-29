@@ -1,24 +1,27 @@
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.statusmessages.interfaces import IStatusMessage
 from ftw.dashboard.portlets.recentlymodified import _
-from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
+from plone import api
 from plone.app.portlets.portlets import base
 from plone.app.portlets.storage import UserPortletAssignmentMapping
-from plone.app.vocabularies.catalog import SearchableTextSourceBinder
+from plone.app.uuid.utils import uuidToObject
+from plone.app.vocabularies.catalog import CatalogSource
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
 from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.registry.interfaces import IRegistry
+from plone.uuid.interfaces import IUUID
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from zope.formlib import form
+from zope.interface import alsoProvides
 from zope.interface import implements
 
 
@@ -30,13 +33,12 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                        default=5)
 
     section = schema.Choice(
-            title=_(u"label_section_path", default=u"Section"),
-            description=_(u'help_section_path',
-                          default=u"Search for section path, "
-                                    "empty means search from root"),
-            required=False,
-            source=SearchableTextSourceBinder({'is_folderish': True},
-                                              default_query='path:'))
+        title=_(u"label_section_path", default=u"Section"),
+        description=_(u'help_section_path',
+                      default=u"Search for section path, "
+                      "empty means search from root"),
+        required=False,
+        source=CatalogSource(is_folderish=True))
 
 
 class Assignment(base.Assignment):
@@ -95,32 +97,27 @@ class Renderer(base.Renderer):
 
     @property
     def title(self):
-        brains = self.catalog(
-            path={'query': self.portal_path + str(self.data.section),
-                  'depth': 0})
-        if len(brains) == 1:
-            section_title = brains[0].Title.decode('utf-8')
+        section = uuidToObject(self.data.section)
+        if not section:
+            return self.portal.Title().decode('utf-8')
         else:
-            section_title = self.portal.Title()
-        if not isinstance(section_title, unicode):
-            section_title = section_title.decode('utf-8')
-        return section_title
+            return section.Title().decode('utf-8')
 
     def _data(self):
-        section = self.data.section
+        section = uuidToObject(self.data.section)
         if not section:
-            section = ''
+            section = self.portal
         limit = self.data.count
         references = self.context.portal_catalog({
-            'path': {'query': self.portal_path + str(section),
+            'path': {'query': '/'.join(section.getPhysicalPath()),
                      'depth': 0, }})
 
-        if references and len(references)>0 and \
-            references[0].portal_type == "Topic":
-            query = references[0].getObject().buildQuery()
+        if references and len(references) > 0 and \
+                references[0].portal_type == "Collection":
+            query = references[0].getObject().getQuery() or {}
         else:
             query = {
-                'path': self.portal_path + str(section),
+                'path': '/'.join(section.getPhysicalPath()),
             }
 
         query["sort_on"] = 'modified'
@@ -150,14 +147,14 @@ class Renderer(base.Renderer):
         return items[:limit]
 
     def more_link(self):
-        section = self.data.section
+        section = uuidToObject(self.data.section)
         if not section:
-            section = ''
+            section = self.portal
         references = self.context.portal_catalog({
-            'path': {'query': self.portal_path + str(section),
+            'path': {'query': '/'.join(section.getPhysicalPath()),
                      'depth': 0, }})
         if references:
-            if references[0].getObject().portal_type == "Topic":
+            if references[0].getObject().portal_type == "Collection":
                 return '%s' % references[0].getURL()
             else:
                 return '%s/recently_modified_view' % references[0].getURL()
@@ -166,12 +163,10 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-
-    form_fields = form.Fields(IRecentlyModifiedPortlet)
-    form_fields['section'].custom_widget = UberSelectionWidget
+    schema = IRecentlyModifiedPortlet
     label = _(u"Add recently modified Portlet")
     description = _(u"This portlet displays recently"
-        u" modified content in a selected section.")
+                    u" modified content in a selected section.")
 
     def create(self, data):
         return Assignment(
@@ -180,16 +175,17 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IRecentlyModifiedPortlet)
-    form_fields['section'].custom_widget = UberSelectionWidget
+    schema = IRecentlyModifiedPortlet
     label = _(u"Edit recently modified Portlet")
-    description = _(u"This portlet displays recently" \
-        u" modified content in a selected section.")
+    description = _(u"This portlet displays recently"
+                    u" modified content in a selected section.")
 
 
 class AddPortlet(object):
 
     def __call__(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
+
         # This is only for a 'recently modified'-user-portlet in dashboard
         # column 1 now, not at all abstracted
         dashboard_name = 'plone.dashboard1'
@@ -211,19 +207,13 @@ class AddPortlet(object):
 
         while id_base + str(id_number) in manager.keys():
             id_number += 1
-        portal_state = getMultiAdapter(
-            (self.context, self.context.REQUEST),
-            name=u'plone_portal_state')
-        context_path = '/'.join(self.context.getPhysicalPath())
-        portal = portal_state.portal()
-        portal_path = '/'.join(portal.getPhysicalPath())
-        relative_context_path = portal_path
 
-        if context_path != portal_path:
-            relative_context_path = context_path.replace(portal_path, '')
+        uid = ''
+        if api.portal.get() != self.context:
+            uid = IUUID(self.context)
         manager[id_base + str(id_number)] = Assignment(
             count=5,
-            section=relative_context_path)
+            section=uid)
 
         request = getattr(self.context, 'REQUEST', None)
         if request is not None:
@@ -252,6 +242,7 @@ class RecentlyModifiedView(BrowserView):
     contents from the members folder is excluded.
     """
     def get_data(self):
+
         # Get config options.
         registry = getUtility(IRegistry)
         types_to_exclude = registry.get(
@@ -289,4 +280,3 @@ class RecentlyModifiedView(BrowserView):
                         if not item.getPath().startswith(members_folder_path)]
 
         return data
-

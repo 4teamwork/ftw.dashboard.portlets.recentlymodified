@@ -21,10 +21,6 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-    <browser:resource
-      name="recentlymodified.truncate-long-text.js"
-      file="recentlymodified.truncate-long-text.js" />
-
   	<browser:resourceDirectory
       name="ftw.dashboard.recentlymodified.resources"
       directory="resources"

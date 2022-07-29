@@ -1,24 +1,37 @@
 from ftw.builder import Builder
 from ftw.builder import create
-from plone.portlets.interfaces import IPortletManager, IPortletRenderer
 from ftw.dashboard.portlets.recentlymodified.browser import recentlymodified
 from ftw.dashboard.portlets.recentlymodified.testing import FTW_RECENTLYMODIFIED_FUNCTIONAL_TESTING
+from plone import api
 from plone.app.controlpanel.security import ISecuritySchema
 from plone.app.testing import login
 from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+from plone.portlets.interfaces import IPortletManager, IPortletRenderer
 from plone.registry.interfaces import IRegistry
 from plone.testing.z2 import Browser
 from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility, getMultiAdapter
 import transaction
-import unittest2 as unittest
+import unittest as unittest
 
 
 class TestExcludedMembersFolder(unittest.TestCase):
 
     layer = FTW_RECENTLYMODIFIED_FUNCTIONAL_TESTING
 
+    def setUp(self):
+        super(TestExcludedMembersFolder, self).setUp()
+        folder_data = {
+            'container': api.portal.get(),
+            'type': 'Folder',
+            'id': 'Members',
+            'title': 'Members'
+            }
+        api.content.create(**folder_data)
+
     def renderer(self, section=''):
+        if not section:
+            section = api.portal.get()
         context = self.layer['portal']
         request = self.layer['request']
         view = context.restrictedTraverse('@@plone')
@@ -32,13 +45,10 @@ class TestExcludedMembersFolder(unittest.TestCase):
 
     def test_home_folder_contents_are_not_listed_in_portlet(self):
         portal = self.layer['portal']
-
+        membership_tool = getToolByName(portal, 'portal_membership')
         # Enable user folders.
         security_adapter = ISecuritySchema(portal)
         security_adapter.set_enable_user_folders(True)
-
-        # Create a members folder.
-        create(Builder('folder').with_id('Members'))
 
         login(portal, TEST_USER_NAME)
         transaction.commit()
@@ -51,9 +61,10 @@ class TestExcludedMembersFolder(unittest.TestCase):
         browser.getControl(name='submit').click()
 
         # There must be a home folder inside the members folder now.
-        membership_tool = getToolByName(portal, 'portal_membership')
+
         members_folder = membership_tool.getMembersFolder()
-        self.assertTrue(members_folder.hasObject('test_user_1_'))
+        members_folder = membership_tool.getMembersFolder()
+        self.assertIn('test_user_1_', members_folder.objectIds())
 
         # Create content in the user's home folder. This content must not be
         # present in the portlet.
@@ -83,9 +94,6 @@ class TestExcludedMembersFolder(unittest.TestCase):
         # Enable user folders.
         security_adapter = ISecuritySchema(portal)
         security_adapter.set_enable_user_folders(True)
-
-        # Create a members folder.
-        create(Builder('folder').with_id('Members'))
 
         login(portal, TEST_USER_NAME)
         transaction.commit()
