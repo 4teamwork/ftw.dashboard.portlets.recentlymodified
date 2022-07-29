@@ -9,7 +9,6 @@ from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login
 from zope.configuration import xmlconfig
 from zope.event import notify
 from zope.traversing.interfaces import BeforeTraverseEvent
-import ftw.dashboard.portlets.recentlymodified.tests.builders  # noqa
 
 
 def functional_session_factory():
@@ -31,7 +30,7 @@ class FtwRecentlymodifiedLayer(PloneSandboxLayer):
             context=configurationContext)
 
     def setUpPloneSite(self, portal):
-        # Install into Plone site using portal_setup
+        applyProfile(portal, 'plone.app.contenttypes:default')
         applyProfile(portal, 'ftw.dashboard.portlets.recentlymodified:default')
 
         setRoles(portal, TEST_USER_ID, ['Manager'])

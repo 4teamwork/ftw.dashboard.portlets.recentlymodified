@@ -19,7 +19,8 @@
                  b_start python:request.get('b_start',0);
                  normalizeString nocall:context/@@plone/normalizeString;
                  toLocalizedTime nocall:context/@@plone/toLocalizedTime;
-                 mtool context/portal_membership;">
+                 mtool context/portal_membership;
+                 plone_layout nocall:context/@@plone_layout">
                  
 
     <h1 class="documentFirstHeading"
@@ -37,7 +38,7 @@
         <dl>
             <tal:results tal:repeat="result batch">
 
-                <dt tal:define="item_icon python:plone_view.getIcon(result);
+                <dt tal:define="item_icon python:plone_layout.getIcon(result);
                                 item_wf_state result/review_state;
                                 item_wf_state_class python:'state-' + normalizeString(item_wf_state);
                                 item_type_class python: not result.getIcon and 'contenttype-' + normalizeString(result.portal_type) or ''">

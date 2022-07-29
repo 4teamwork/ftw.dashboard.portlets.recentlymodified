@@ -4,7 +4,6 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 from ftw.dashboard.portlets.recentlymodified import _
-from plone.app.form.widgets.uberselectionwidget import UberSelectionWidget
 from plone.app.portlets.portlets import base
 from plone.app.portlets.storage import UserPortletAssignmentMapping
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
@@ -18,7 +17,6 @@ from plone.registry.interfaces import IRegistry
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from zope.formlib import form
 from zope.interface import implements
 
 
@@ -30,13 +28,13 @@ class IRecentlyModifiedPortlet(IPortletDataProvider):
                        default=5)
 
     section = schema.Choice(
-            title=_(u"label_section_path", default=u"Section"),
-            description=_(u'help_section_path',
-                          default=u"Search for section path, "
-                                    "empty means search from root"),
-            required=False,
-            source=SearchableTextSourceBinder({'is_folderish': True},
-                                              default_query='path:'))
+        title=_(u"label_section_path", default=u"Section"),
+        description=_(u'help_section_path',
+                      default=u"Search for section path, "
+                      "empty means search from root"),
+        required=False,
+        source=SearchableTextSourceBinder({'is_folderish': True},
+                                          default_query='path:'))
 
 
 class Assignment(base.Assignment):
@@ -115,8 +113,8 @@ class Renderer(base.Renderer):
             'path': {'query': self.portal_path + str(section),
                      'depth': 0, }})
 
-        if references and len(references)>0 and \
-            references[0].portal_type == "Topic":
+        if references and len(references) > 0 and \
+                references[0].portal_type == "Topic":
             query = references[0].getObject().buildQuery()
         else:
             query = {
@@ -166,12 +164,10 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-
-    form_fields = form.Fields(IRecentlyModifiedPortlet)
-    form_fields['section'].custom_widget = UberSelectionWidget
+    schema = IRecentlyModifiedPortlet
     label = _(u"Add recently modified Portlet")
     description = _(u"This portlet displays recently"
-        u" modified content in a selected section.")
+                    u" modified content in a selected section.")
 
     def create(self, data):
         return Assignment(
@@ -180,11 +176,10 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IRecentlyModifiedPortlet)
-    form_fields['section'].custom_widget = UberSelectionWidget
+    schema = IRecentlyModifiedPortlet
     label = _(u"Edit recently modified Portlet")
-    description = _(u"This portlet displays recently" \
-        u" modified content in a selected section.")
+    description = _(u"This portlet displays recently"
+                    u" modified content in a selected section.")
 
 
 class AddPortlet(object):
@@ -289,4 +284,3 @@ class RecentlyModifiedView(BrowserView):
                         if not item.getPath().startswith(members_folder_path)]
 
         return data
-

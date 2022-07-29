@@ -1,17 +1,17 @@
-from ftw.dashboard.portlets.recentlymodified.browser import recentlymodified
-from ftw.dashboard.portlets.recentlymodified.testing \
-    import FTW_RECENTLYMODIFIED_INTEGRATION_TESTING
 from ftw.builder import Builder
 from ftw.builder import create
+from ftw.dashboard.portlets.recentlymodified.browser import recentlymodified
+from ftw.dashboard.portlets.recentlymodified.testing import FTW_RECENTLYMODIFIED_INTEGRATION_TESTING
+from plone import api
+from plone.app.testing import TEST_USER_ID
+from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility, getMultiAdapter
 from zope.i18n import translate
-from plone.app.testing import TEST_USER_ID
-from plone.portlets.constants import USER_CATEGORY
-import unittest2 as unittest
+import unittest as unittest
 
 
 class TestPortlet(unittest.TestCase):
@@ -56,7 +56,7 @@ class TestPortlet(unittest.TestCase):
         self.assertEqual(context_title, portlet_title)
 
     def test_title_with_section(self):
-        create(Builder('folder').titled('My Folder'))
+        create(Builder('folder').titled(u'My Folder'))
         r = self.renderer('/my-folder')
         self.assertEqual(r.title, 'My Folder')
 
@@ -127,17 +127,14 @@ class TestPortlet(unittest.TestCase):
             'title_recentlyModifed_portlet')
 
     def test_section_is_topic(self):
-        portal = self.layer['portal']
-        portal.manage_addProduct['ATContentTypes'].addATTopic(
-            id='test_topic',
-            title='Test Topic')
-        topic = portal.test_topic
-        topic.reindexObject()
-        topic.addCriterion('Type', 'ATPortalTypeCriterion')
-        portal.REQUEST.set('crit__Type_ATPortalTypeCriterion_value',
-                           ['Document'])
-        topic.criterion_save()
-        r = self.renderer('/test_topic')
+        collection_data = {
+            'container': api.portal.get(),
+            'Title': 'Test Collection',
+            'id': 'test_collection',
+            'type': 'Collection',
+        }
+        api.content.create(**collection_data)
+        r = self.renderer('/test_collection')
         self.assertEqual(r._data() > 0, True)
 
     def test_caching_data_if_calling_public_data_method(self):

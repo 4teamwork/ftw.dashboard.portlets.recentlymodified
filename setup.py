@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.3.4.dev0'
+version = '2.0.0.dev0'
 maintainer = 'Philipp Gross'
 
 tests_require = [
@@ -11,6 +11,7 @@ tests_require = [
     'plone.app.testing',
     'plone.mocktestcase',
     'zope.testing',
+    'plone.app.contenttypes',
 ]
 
 setup(name='ftw.dashboard.portlets.recentlymodified',
@@ -24,9 +25,9 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
 
       classifiers=[
         'Framework :: Plone',
-        'Framework :: Plone :: 4.2',
-        'Framework :: Plone :: 4.3',
+        'Framework :: Plone :: 5.1',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
         ],
 
@@ -46,7 +47,7 @@ setup(name='ftw.dashboard.portlets.recentlymodified',
           'Plone',
           'setuptools',
           'ftw.upgrade',
-          'collective.js.jqsmartTruncation',
+          'ftw.dashboard.dragndrop>=2',
           # -*- Extra requirements: -*-
       ],
       tests_require=tests_require,
