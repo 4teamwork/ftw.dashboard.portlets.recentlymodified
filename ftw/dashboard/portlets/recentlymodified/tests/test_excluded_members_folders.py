@@ -30,6 +30,8 @@ class TestExcludedMembersFolder(unittest.TestCase):
         api.content.create(**folder_data)
 
     def renderer(self, section=''):
+        if not section:
+            section = api.portal.get()
         context = self.layer['portal']
         request = self.layer['request']
         view = context.restrictedTraverse('@@plone')

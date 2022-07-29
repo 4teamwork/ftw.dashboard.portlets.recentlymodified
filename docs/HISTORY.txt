@@ -5,6 +5,8 @@ Changelog
 2.0.0 (unreleased)
 ------------------
 
+- Remove formlib form and replace section source with a Catalog source (UID based). [mathias.leimgruber]
+
 - Add plone 5.x compatibility [mathias.leimgruber]
 
 - Drop Plone 4.x support. [mathias.leimgruber]

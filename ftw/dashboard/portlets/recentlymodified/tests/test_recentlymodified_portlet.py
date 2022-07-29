@@ -9,6 +9,7 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
 from plone.registry.interfaces import IRegistry
+from plone.uuid.interfaces import IUUID
 from zope.component import getUtility, getMultiAdapter
 from zope.i18n import translate
 import unittest as unittest
@@ -32,6 +33,8 @@ class TestPortlet(unittest.TestCase):
             recentlymodified.IRecentlyModifiedPortlet.providedBy(portlet))
 
     def renderer(self, section=''):
+        if not section:
+            section = api.portal.get()
         context = self.layer['portal']
         request = self.layer['request']
         view = context.restrictedTraverse('@@plone')
@@ -56,20 +59,20 @@ class TestPortlet(unittest.TestCase):
         self.assertEqual(context_title, portlet_title)
 
     def test_title_with_section(self):
-        create(Builder('folder').titled(u'My Folder'))
-        r = self.renderer('/my-folder')
+        folder = create(Builder('folder').titled(u'My Folder'))
+        r = self.renderer(IUUID(folder))
         self.assertEqual(r.title, 'My Folder')
 
     def test_data(self):
-        create(Builder('folder'))
+        folder = create(Builder('folder'))
 
-        r = self.renderer('/folder')
+        r = self.renderer(IUUID(folder))
         self.assertEqual(r._data() > 0, True)
 
     def test_more_link(self):
-        create(Builder('folder'))
+        folder = create(Builder('folder'))
 
-        r = self.renderer('/folder')
+        r = self.renderer(IUUID(folder))
         url = r.more_link()
         portal = self.layer['portal']
         expected_url = '%s/recently_modified_view' % \
@@ -133,8 +136,8 @@ class TestPortlet(unittest.TestCase):
             'id': 'test_collection',
             'type': 'Collection',
         }
-        api.content.create(**collection_data)
-        r = self.renderer('/test_collection')
+        collection = api.content.create(**collection_data)
+        r = self.renderer(IUUID(collection))
         self.assertEqual(r._data() > 0, True)
 
     def test_caching_data_if_calling_public_data_method(self):
