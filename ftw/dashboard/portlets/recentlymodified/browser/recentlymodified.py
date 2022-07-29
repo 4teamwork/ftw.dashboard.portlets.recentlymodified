@@ -11,6 +11,7 @@ from plone.memoize.instance import memoize
 from plone.portlets.constants import USER_CATEGORY
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
@@ -20,6 +21,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.interface import alsoProvides
 from zope.interface import implements
 
 
@@ -182,6 +184,8 @@ class EditForm(base.EditForm):
 class AddPortlet(object):
 
     def __call__(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
+
         # This is only for a 'recently modified'-user-portlet in dashboard
         # column 1 now, not at all abstracted
         dashboard_name = 'plone.dashboard1'
@@ -238,6 +242,7 @@ class RecentlyModifiedView(BrowserView):
     contents from the members folder is excluded.
     """
     def get_data(self):
+
         # Get config options.
         registry = getUtility(IRegistry)
         types_to_exclude = registry.get(
